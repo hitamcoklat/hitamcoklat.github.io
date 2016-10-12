@@ -679,6 +679,11 @@ article {
     margin-top: 10px;
     display: block; }
 
+.pagination {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1em; }
+
 /*
 * Media Queries
 * ========================================================================== */
