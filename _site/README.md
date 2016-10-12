@@ -1,6 +1,6 @@
-## Voyager
+## About this blog
 
-Just another jekyll theme. Demo: <http://redvi.github.io/voyager>
+This blog is using jekyll theme. Demo: <http://redvi.github.io/voyager>
 
 ### Feathures:
 
