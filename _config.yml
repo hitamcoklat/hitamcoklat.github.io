@@ -14,7 +14,7 @@ description: >
   some useful information
 baseurl: "" # the subpath of your site, e.g. /blog
 lang: "id"
-url: "https://hitamcoklat.github.io" # the base hostname & protocol for your site
+url: "http://blog.hitamcoklat.com" # the base hostname & protocol for your site
 twitter_username: septiandwia
 github_username: hitamcoklat
 disqus_username: hitamcoklat
