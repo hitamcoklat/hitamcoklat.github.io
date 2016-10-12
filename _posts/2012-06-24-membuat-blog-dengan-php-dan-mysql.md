@@ -102,7 +102,7 @@ Oke langsung aja jika ingin melihat hasil akhirnya, silahkan download
   <div class='cont'>
     <div class='btn_outer'>
       <div class='btn_outer_c' style='background-image: url(http://localhost/hitamcoklat/wp-content/plugins/download-manager/icon/Download_Crate.png);'>
-        <a class='btn_left  ' rel='4' title='Blog' href="http://localhost/hitamcoklat/?wpdmact=process&did=NC5ob3RsaW5r"   >Download</a><span class='btn_right'>&nbsp;</span>
+        <a class='btn_left  ' rel='4' title='Blog' href="http://hitamcoklat.com/wp-content/uploads/download-manager-files/shopping_cart.rar">Download</a><span class='btn_right'>&nbsp;</span>
       </div>
     </div>
     
