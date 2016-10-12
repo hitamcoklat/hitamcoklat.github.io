@@ -26,7 +26,7 @@ Pada langkah pertama ini buatlah database yang terdiri dari 5 table,
 
 Yang pertama adalah table Kategori,
 
-<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `category` (
+<pre>CREATE TABLE `category` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `category` varchar(100) NOT NULL,
             PRIMARY KEY (`id`)
