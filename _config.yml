@@ -7,18 +7,17 @@
 
 # Site settings
 title: Blog Hitamcoklat
-
 email: info@hitamcoklat.com
 name: Hitamcoklat
 description: >
   Blogging, Internet, Tips and Trick, and
   some useful information
 baseurl: "" # the subpath of your site, e.g. /blog
-lang: "en"
+lang: "id"
 url: "https://hitamcoklat.github.io" # the base hostname & protocol for your site
 twitter_username: septiandwia
 github_username: hitamcoklat
-disqus_username:
+disqus_username: hitamcoklat
 gems: [jekyll-paginate]
 paginate: 7
 paginate_path: "/blog/page:num/"
