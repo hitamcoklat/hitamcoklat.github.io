@@ -4,10 +4,10 @@
     <title>Blog Hitamcoklat</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Oct 2016 10:50:55 +0700</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2016 10:50:55 +0700</lastBuildDate>
+    <link>https://hitamcoklat.github.io/</link>
+    <atom:link href="https://hitamcoklat.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 12 Oct 2016 10:53:11 +0700</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 10:53:11 +0700</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -76,8 +76,8 @@
 &lt;p&gt;Gimana? sampai sini mengalami kesulitan? Silahkan komentar di bagian bawah, jika tidak mengalami kesulitan silahkan lanjut ke Bagian 2 nya  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 29 Jul 2016 00:01:27 +0700</pubDate>
-        <link>http://localhost:4000/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</guid>
+        <link>https://hitamcoklat.github.io/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</link>
+        <guid isPermaLink="true">https://hitamcoklat.github.io/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</guid>
         
         <category>api programming</category>
         
@@ -437,8 +437,8 @@
 &lt;p&gt;Gimana? sampai disini ada pertanyaan atau masih bingung?  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;. Silahkan komentar dibawah ya&lt;/p&gt;
 </description>
         <pubDate>Thu, 28 Jul 2016 23:59:54 +0700</pubDate>
-        <link>http://localhost:4000/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</guid>
+        <link>https://hitamcoklat.github.io/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</link>
+        <guid isPermaLink="true">https://hitamcoklat.github.io/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</guid>
         
         <category>php</category>
         
@@ -471,8 +471,8 @@
 &lt;p&gt;Semoga Bermanfaat!  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Jun 2016 15:07:43 +0700</pubDate>
-        <link>http://localhost:4000/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</guid>
+        <link>https://hitamcoklat.github.io/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</link>
+        <guid isPermaLink="true">https://hitamcoklat.github.io/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</guid>
         
         <category>data parsing</category>
         
@@ -514,8 +514,8 @@
 &lt;p&gt;Semoga bermanfaat…&lt;/p&gt;
 </description>
         <pubDate>Tue, 22 Mar 2016 22:23:11 +0700</pubDate>
-        <link>http://localhost:4000/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</guid>
+        <link>https://hitamcoklat.github.io/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</link>
+        <guid isPermaLink="true">https://hitamcoklat.github.io/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</guid>
         
         <category>android</category>
         
@@ -953,8 +953,8 @@ body {
 &lt;p&gt;&lt;a href=&quot;http://www.hitamcoklat.com/download/?3006342321751ecf0fe55306b8c71fe7&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://www.hitamcoklat.com']);&quot; class=&quot;download&quot;&gt;Download File&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Jun 2014 00:31:24 +0700</pubDate>
-        <link>http://localhost:4000/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</link>
-        <guid isPermaLink="true">http://localhost:4000/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</guid>
+        <link>https://hitamcoklat.github.io/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</link>
+        <guid isPermaLink="true">https://hitamcoklat.github.io/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</guid>
         
         <category>membuat blog php</category>
         
