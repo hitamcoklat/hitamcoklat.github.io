@@ -3,6 +3,15 @@
 
   
   <url>
+    <loc>http://blog.hitamcoklat.com/2016/10/12/migrasi-ke-platform-jekyll/</loc>
+    
+      <lastmod>2016-10-12</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.hitamcoklat.com/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</loc>
     
       <lastmod>2016-07-29</lastmod>

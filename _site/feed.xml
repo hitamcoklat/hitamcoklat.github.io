@@ -6,9 +6,67 @@
 </description>
     <link>http://blog.hitamcoklat.com/</link>
     <atom:link href="http://blog.hitamcoklat.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 12 Oct 2016 19:44:07 +0700</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2016 19:44:07 +0700</lastBuildDate>
+    <pubDate>Wed, 12 Oct 2016 20:46:50 +0700</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 20:46:50 +0700</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>Migrasi Ke Platform Jekyll</title>
+        <description>&lt;p&gt;&lt;img src=&quot;http://res.cloudinary.com/hitamcoklat/image/upload/v1476279476/logo-2x_vy16hr.png&quot; alt=&quot;enter image description here&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Setelah berpikir lumayan lama, akhirnya jatuh pilihan pada platform &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; ini. Ya, &lt;strong&gt;&lt;em&gt;jekyll&lt;/em&gt;&lt;/strong&gt; merupakan sebuah platform blog. Secara sekilas bagi pengunjung blog ini mungkin tidak ada perbedaan dari sisi desain dan tampilan (yaa emang gak akan ada perbedaan dari sisi tampilan soalnya browser hanya menampilan HTML, CSS dan Javascript). Terus perbedaannya ada dong dengan platform &lt;strong&gt;&lt;em&gt;Wordpress&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;Blogpost&lt;/em&gt;&lt;/strong&gt; dan lainnya?&lt;/p&gt;
+
+&lt;p&gt;Nah, yang jadi perbedaan &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; dengan platform yang lainnya adalah secara teknis &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; akan mengonfersikan atau meng-konvert &lt;em&gt;aduh ribet juga ya bahasanya hehe. Jadi maksudnya &lt;strong&gt;*Jekyll&lt;/strong&gt;&lt;/em&gt; ini merubah CMS atau sistem platform postingan anda ke dalam bentuk file statis. Otomatis dengan proses pembacaan file statis ini dapat lebih mempercepat proses eksekusi di server bahkan sangat cepat sekali hehe. Ini sangat cocok sekali bagi anda yang memiliki hostingan dengan memori yang sangat kecil. Apalagi kita tahu sendiri bahwa jumlah memori yang disediakan pada shared hosting sangat kecil sekali *sedikit curhat mengenai hostingan yang saya pakai :)&lt;/p&gt;
+
+&lt;p&gt;Alasan kedua saya menggunakan platform &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; ini adalah kemudahan dalam melakukan postingan. Karena &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; ini menggunakan &lt;strong&gt;&lt;em&gt;Markdown&lt;/em&gt;&lt;/strong&gt; sebagai format penulisannya yang nantinya akan di rubah menjadi HTML secara otomatis dan tentu saja di generate ke dalam file statis.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML). Thus, “Markdown” is two things: (1) a plain text formatting syntax; and (2) a software tool, written in Perl, that converts the plain text formatting to HTML.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Selanjutnya adalah ternyata banyak sekali dukungan terhadap &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; ini. Sudah banyak sekali developer yang mengembangkan themes secara open-source yang super keren2 tampilannya &lt;em&gt;mungkin saya yang ketinggalan jaman haha. Bagaimana dengan teks editornya? apakah kita harus mengerti format2 &lt;strong&gt;*Markdown&lt;/strong&gt;&lt;/em&gt; itu sendiri? menurut saya bagus sih kalo kita mau belajar sedikit tentang format &lt;strong&gt;&lt;em&gt;Markdown&lt;/em&gt;&lt;/strong&gt; itu sendiri soalnya simpel banget format nya :) coba deh, atau jika agan pengen teks editor seperti &lt;strong&gt;&lt;em&gt;Wordpress&lt;/em&gt;&lt;/strong&gt; punya, silahkan &lt;em&gt;download&lt;/em&gt; atau coba aplikasi ini &lt;a href=&quot;https://stackedit.io/editor&quot;&gt;https://stackedit.io/editor&lt;/a&gt; dijamin gampang deh pake teks editor itu ;)&lt;/p&gt;
+
+&lt;p&gt;Terakhir berhubung &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; ini di build menggunakan &lt;strong&gt;&lt;em&gt;ruby&lt;/em&gt;&lt;/strong&gt; agan harus install dulu &lt;strong&gt;&lt;em&gt;ruby&lt;/em&gt;&lt;/strong&gt; di OS agan. Silahkan langsung aja ketik sintaks dibawah ini di Terminal agan:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Setelah itu lanjut membuat folder dan platform &lt;strong&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/strong&gt; nya dengan mengetik sintaks dibawah ini&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~ $ gem install jekyll bundler
+~ $ jekyll new myblog
+~ $ cd myblog
+~/myblog $ bundle exec jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Jekyll serve&lt;/strong&gt; merupakan proses me-live kan hasil dari kompilasi yang agan buat. Nah setelah itu buka browser agan ketik&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://127.0.0.1:4000 atau http://localhost:4000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Secara default &lt;strong&gt;Jekyll&lt;/strong&gt; akan menggunakan port &lt;strong&gt;4000&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Terus bagaimana bagi agan yang sudah terlanjur menggunakan &lt;strong&gt;&lt;em&gt;Wordpress&lt;/em&gt;&lt;/strong&gt; dan postingannya sudah lumayan banyak dan ingin bermigrasi ke platform &lt;strong&gt;Jekyll&lt;/strong&gt; ini? Nanti dibahas di postingan selanjutnya aja ya gan :)&lt;/p&gt;
+
+&lt;p&gt;Jika ada pertanyaan atau masukan silahkan di kolom komentar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Salam Blogger!&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Oct 2016 00:00:00 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2016/10/12/migrasi-ke-platform-jekyll/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2016/10/12/migrasi-ke-platform-jekyll/</guid>
+        
+        <category>Jekyll</category>
+        
+        
+        <category>php</category>
+        
+        <category>Tutorial</category>
+        
+      </item>
     
       <item>
         <title>API Programming Studi Kasus Twitter Search Part 1</title>
@@ -535,437 +593,6 @@
         <category>Tutorial</category>
         
         <category>Website</category>
-        
-      </item>
-    
-      <item>
-        <title>Membuat CMS Blog PHP dan MySQL Part-1</title>
-        <description>&lt;p&gt;Pada postingan kali ini saya akan membahas mengenai pembuatan CMS blog. Yaa sebelumnya saya posting tentang “Membuat Blog dengan PHP” tapi tidak begitu jelas yah hehe, sekarang mau coba posting mengenai pembuatan CMS blog yang lebih lengkap nya, supaya lebih jelas.. 
-&lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;kerangka-postingan&quot;&gt;Kerangka Postingan&lt;/h2&gt;
-
-&lt;table style=&quot;border-collapse:collapse;border-spacing:0; margin-left: 20px; margin-bottom: 20px;&quot;&gt;
-  &lt;tr&gt;
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px; text-align: left;&quot; colspan=&quot;2&quot;&gt;
-      Membuat Blog Part-1
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot; rowspan=&quot;3&quot;&gt;
-      Pembahasan Kali ini -&amp;gt;
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat halaman awal Blog
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat halaman detail Blog
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat Database &amp;amp; Table
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-weight:bold&quot; colspan=&quot;2&quot;&gt;
-      Membuat Blog Part-2
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot; rowspan=&quot;2&quot;&gt;
-      Pembahasan =&amp;gt;
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat Halaman admin
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat Fitur Posting &amp;#8211; add, edit dan delete
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-weight:bold&quot; colspan=&quot;2&quot;&gt;
-      Membuat Blog Part-3
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot;&gt;
-      Pembahasan =&amp;gt;
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
-      Membuat Fitur Kategori &amp;#8211; add, edit dan delete
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Pertama kita siapkan dulu file untuk halaman front end nya, dimana file ini berfungsi untuk menampilkan halaman postingan kita. Didalam halaman ini terdiri dari&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Header&lt;/li&gt;
-  &lt;li&gt;Navigasi&lt;/li&gt;
-  &lt;li&gt;Bagian artikel yang terletak disebelah kiri&lt;/li&gt;
-  &lt;li&gt;Bagian sidebar yang akan menampilkan postingan terbaru, terletak disebelah kanan&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Pada bagian halaman artikel terdapat 2 tampilan, yaitu halaman home awal yang befungsi untuk melihat kilasan artikel sebelum user melihat artikel secara detail dan halaman detail artikel dimana user akan melihat detail artikel ketika user meng klik artikel lalu setelah itu kita tampilkan artikel secara penuh.&lt;/p&gt;
-
-&lt;h2 id=&quot;membuat-halaman-depan-blog&quot;&gt;Membuat Halaman depan Blog&lt;/h2&gt;
-
-&lt;p&gt;Baiklah langsung saja kita membuat halaman awal blog kita. Pada pembuatan blog yang akan kita buat ini dapat langsung liat di screenshot nya dibawah ini.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog.jpg&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;halaman_depan_blog&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1124&quot; title=&quot;halaman_depan_blog&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-300x228.jpg&quot; alt=&quot;halaman_depan_blog&quot; width=&quot;300&quot; height=&quot;228&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Dan halaman detail artikelnya sebagai berikut&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-FILEminimizer.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;halaman_depan_dua&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1126&quot; title=&quot;halaman_depan_dua&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-FILEminimizer-300x232.png&quot; alt=&quot;halaaman_detail_blog&quot; width=&quot;300&quot; height=&quot;232&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Berikut source code HTML nya&lt;/p&gt;
-
-&lt;h3 id=&quot;indexhtml&quot;&gt;index.html&lt;/h3&gt;
-
-&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;&amp;lt;html&amp;gt;
-	&amp;lt;head&amp;gt;
-		&amp;lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/style.css&quot; /&amp;gt;
-	&amp;lt;/head&amp;gt;
-	&amp;lt;body&amp;gt;
-		&amp;lt;div id=&quot;wrap&quot;&amp;gt;
-			&amp;lt;div id=&quot;header&quot;&amp;gt;
-				&amp;lt;h1&amp;gt;Hitamcoklat | Blog&amp;lt;/h1&amp;gt;
-			&amp;lt;/div&amp;gt;
-			&amp;lt;div id=&quot;navigasi&quot;&amp;gt;
-				&amp;lt;ul&amp;gt;
-					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Satu&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Dua&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Tiga&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Empat&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-				&amp;lt;/ul&amp;gt;
-			&amp;lt;/div&amp;gt;
-			&amp;lt;div id=&quot;konten&quot;&amp;gt;
-				&amp;lt;div id=&quot;kiri&quot;&amp;gt;
-					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
-						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
-						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
-					&amp;lt;/div&amp;gt;
-
-					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
-						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
-						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
-					&amp;lt;/div&amp;gt;
-
-					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
-						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
-						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
-					&amp;lt;/div&amp;gt;
-
-				&amp;lt;/div&amp;gt;
-				&amp;lt;div id=&quot;kanan&quot;&amp;gt;
-					&amp;lt;h2&amp;gt;Recent Post&amp;lt;/h2&amp;gt;
-					&amp;lt;ul&amp;gt;
-						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Satu&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Dua&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Tiga&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Empat&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-					&amp;lt;/ul&amp;gt;
-				&amp;lt;/div&amp;gt;
-			&amp;lt;/div&amp;gt;
-			&amp;lt;div class=&quot;clear&quot;&amp;gt;&amp;lt;/div&amp;gt;
-			&amp;lt;div id=&quot;footer&quot;&amp;gt;
-				&amp;lt;p&amp;gt;Hitamcoklat | Blog&amp;lt;/p&amp;gt;
-			&amp;lt;/div&amp;gt;
-		&amp;lt;/div&amp;gt;
-	&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/pre&gt;
-
-&lt;h3 id=&quot;stylecss&quot;&gt;style.css&lt;/h3&gt;
-
-&lt;pre class=&quot;brush: css; title: ; notranslate&quot; title=&quot;&quot;&gt;* {
-	margin: 0;
-	padding: 0;
-}
-body {
-	background-color: #fff;
-	font-family: Arial;
-	font-size: 0.850em;
-}
-
-.artikel p {
-	margin-top: 10px;
-}
-
-#wrap {
-	padding: 10px;
-	background-color: #EAEAEA;
-	width: 800px;
-	margin: 20px auto;
-}
-
-#header, #navigasi, #konten {
-	width: 100%;
-	float: left;
-}
-
-#header {
-	height: 70px;
-}
-
-#navigasi {
-	background-color: #CCC;
-}
-
-#navigasi ul li {
-	margin: 10px;
-	font-weight: bold;
-	list-style: none;
-	float: left;
-}
-
-#navigasi ul li a, #kanan ul li a {
-	text-decoration: none;
-	color: #000;
-}
-
-#navigasi ul li a:hover, #kanan ul li a:hover {
-	text-decoration: underline;
-}
-
-#kanan ul li {
-	list-style: none;
-	font-weight: bold;
-	border-left: 3px solid #CCC;
-	margin-top: 5px;
-	padding-left: 5px;
-	background-color: #fff;
-}
-.clear {
-	clear: both;
-}
-
-.artikel {
-	border: 1px solid #CCC;
-	margin-top: 10px;
-	padding: 10px;
-	background-color: #fff;
-}
-
-#kiri {
-	padding: 10px;
-	float: left;
-	width: 65%;
-}
-
-#kanan {
-	padding: 10px;
-	float: left;
-	width: 30%;
-}
-
-#footer {
-	background-color: #CCCCCC;
-	width: 100%;
-	height: 50px;
-}
-
-#footer p {
-	margin: 10px;
-	float: left;
-}
-&lt;/pre&gt;
-
-&lt;p&gt;Baiklah jika semuanya sudah selesai maka tampilannya akan sama dengan screenshot diatas  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;, kita lanjut membuat database yaa biar cepet hehe&lt;/p&gt;
-
-&lt;h2 id=&quot;membuat-database&quot;&gt;Membuat database&lt;/h2&gt;
-
-&lt;p&gt;Selanjutnya kita akan membuat database. Seperti biasa pertama buat dulu database di phpmyadmin dengan nama bebas terserah anda hehe. Setelah itu kita akan membuat table – table dalam database, untuk lebih jelasnya dapat dilihat pada gambar berikut ini&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/database.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;database&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1135&quot; title=&quot;database&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/database-300x206.png&quot; alt=&quot;database&quot; width=&quot;300&quot; height=&quot;206&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;*Keterangan&lt;/p&gt;
-
-&lt;h3 id=&quot;table-category&quot;&gt;Table Category&lt;/h3&gt;
-
-&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
-  &lt;tr&gt;
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Nama Field
-    &lt;/th&gt;
-    
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Tipe
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      id
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      int(11)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      category
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      varchar(100)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;table-artikel&quot;&gt;Table Artikel&lt;/h3&gt;
-
-&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
-  &lt;tr&gt;
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Nama Field
-    &lt;/th&gt;
-    
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Tipe
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      id
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      int(11)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      id_kategori
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      varchar(100)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      judul
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      varchar(250)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      konten
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      text
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      tanggal
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;table-user&quot;&gt;Table User&lt;/h3&gt;
-
-&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
-  &lt;tr&gt;
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Nama Field
-    &lt;/th&gt;
-    
-    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
-      Tipe
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      id_user
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      int(5)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      username
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      varchar(10)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      password
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      varchar(35)
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      level
-    &lt;/td&gt;
-    
-    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
-      enum(&amp;#8216;user&amp;#8217;,'admin&amp;#8217;)&lt;br /&gt; DEFAULT ‘user’
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Oke untuk part pertama cukup sampai disini, besok dilanjut yah   &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;Salam Blogger!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.hitamcoklat.com/download/?3006342321751ecf0fe55306b8c71fe7&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://www.hitamcoklat.com']);&quot; class=&quot;download&quot;&gt;Download File&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 12 Jun 2014 00:31:24 +0700</pubDate>
-        <link>http://blog.hitamcoklat.com/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</link>
-        <guid isPermaLink="true">http://blog.hitamcoklat.com/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</guid>
-        
-        <category>membuat blog php</category>
-        
-        <category>membuat CMS dengan php</category>
-        
-        <category>Membuat CMS PHP mudah</category>
-        
-        
-        <category>php</category>
-        
-        <category>Tutorial</category>
         
       </item>
     
