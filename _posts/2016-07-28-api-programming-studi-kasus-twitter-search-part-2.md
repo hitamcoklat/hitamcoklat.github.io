@@ -1,0 +1,357 @@
+---
+id: 1312
+title: API Programming Studi Kasus Twitter Search Part 2
+date: 2016-07-28T16:59:54+00:00
+author: admin
+layout: post
+guid: http://hitamcoklat.com/?p=1312
+permalink: /2016/07/28/api-programming-studi-kasus-twitter-search-part-2/
+categories:
+  - php
+  - Tutorial
+tags:
+  - php
+  - tutorial
+  - tutorial api programming
+---
+Jika di part 1, telah dijelaskan mengenai pembuatan dari API Twitter dari sisi Twitter nya. Selanjutnya, di bagian ini kita akan membuat tampilan disisi kita atau dengan kata lain kita akan membuat **view** dari API Twitter yang akan dihasilkan (JSON yang dihasilkan).
+
+Silahkan buat file index.php
+
+<pre class="brush: php; title: ; notranslate" title="">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;meta name="description" content=""&gt;
+    &lt;meta name="author" content="Septian Dwi Anugrah"&gt;
+
+    &lt;title&gt;Search Twitter API&lt;/title&gt;
+
+    &lt;!-- Bootstrap Core CSS --&gt;
+    &lt;link href="assets/css/bootstrap.min.css" rel="stylesheet"&gt;
+    &lt;link href="assets/css/styles.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="row"&gt;
+      &lt;div class="navbar navbar-default"&gt;
+        &lt;div class="container"&gt;
+
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="container"&gt;
+        &lt;div class="row"&gt;
+          &lt;div class="col-md-12"&gt;
+            &lt;img src="assets/img/logo.png" class="pull-left" id="heading" /&gt;
+            &lt;div class="row"&gt;
+              &lt;div id="search" class="col-md-12"&gt;
+                  &lt;div class="form-group col-md-12"&gt;
+                    &lt;div class="col-md-8"&gt;
+                      &lt;input id="searchKeyWord" placeholder="Enter Keyword or #Hashtag" type="text"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-2"&gt;
+                      &lt;select id="count" class="col-xs-12 col-md-12 text-center" name="count"&gt;
+                        &lt;option value="10"&gt;10&lt;/option&gt;
+                        &lt;option value="100"&gt;100&lt;/option&gt;
+                        &lt;option value="200"&gt;200&lt;/option&gt;
+                      &lt;/select&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-md-2"&gt;
+                      &lt;button type="submit" id="btnSearch" class="btn btn-primary pull-right col-md-10 col-lg-10 col-xs-12 text-center"&gt;Search&lt;/button&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;span class="text-center col-xs-12 col-lg-12 col-md-12" id="loading"&gt;
+                    
+                  &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;br&gt;
+            &lt;br&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+&lt;div class="section"&gt;
+    &lt;div class="container"&gt;
+      &lt;div style="overflow: auto;" class="row col-xs-12"&gt;
+      
+      &lt;div class="clearfix"&gt;&lt;/div&gt;
+      &lt;table id="theData" class="tg"&gt;
+        &lt;thead&gt;
+
+        &lt;/thead&gt;
+        &lt;tbody id="showTable"&gt;
+        &lt;!-- show table result --&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script src="assets/js/jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+  &lt;script src="assets/js/autolink-min.js" type="text/javascript"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    
+  $(document).ready(function(){
+
+    $('#btnSearch').click(function(){
+
+        $('#export').hide();
+        $('#loading').empty();
+        $('#loading').append('Loading...');
+        $('#showTable tr').remove();
+
+        var data = {
+            keyword: $('#searchKeyWord').val(),
+            count: $('#count').val()
+        }      
+
+        $.post("api/index.php", data, function(data, status) {
+
+            if(status == 'success' && data.statuses.length &gt; 0){
+
+                $('#export').show();
+                $('#loading').empty();
+                $('#showTable').append('&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Username&lt;/th&gt;&lt;th&gt;Profile Image&lt;/th&gt;&lt;th&gt;Tweet&lt;/th&gt;&lt;th&gt;Location&lt;/th&gt;&lt;th&gt;Followers Count&lt;/th&gt;&lt;th&gt;Friends Count&lt;/th&gt;&lt;th&gt;Time Zone&lt;/th&gt;&lt;/tr&gt;');
+               
+                $.each( data.statuses, function(i, item){
+                  $('#showTable').append('&lt;tr&gt;&lt;td&gt;'+item.user.name+'&lt;/td&gt;'+'&lt;td&gt;&lt;a href="https://twitter.com/'+item.user.screen_name+'"&gt;'+item.user.screen_name+'&lt;/a&gt;&lt;/td&gt;'+'&lt;td class="text-center"&gt;&lt;img src="'+item.user.profile_image_url+'" /&gt;&lt;/td&gt;'+'&lt;td&gt;'+item.text.autoLink({target: "_blank"})+'&lt;/td&gt;'+'&lt;td&gt;'+item.user.location+'&lt;/td&gt;&lt;td class="text-center"&gt;'+item.user.followers_count+'&lt;/td&gt;&lt;td class="text-center"&gt;'+item.user.friends_count+'&lt;/td&gt;&lt;td&gt;'+item.user.time_zone+'&lt;/td&gt;&lt;/tr&gt;').hide().fadeIn();
+                });
+
+            } 
+
+            else if(status == 'success' && data.statuses.length &lt;= 0) {
+
+              $('#loading').empty();
+              $('#loading').append('Not Available!');
+
+            }
+
+            else {
+
+                console.log('ERROR!');
+                alert('ERROR!');
+            
+            }
+
+        });
+
+    });    
+
+  });
+
+  &lt;/script&gt;
+
+  &lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+## Penjelasan file index.php
+
+Pada baris berikut
+
+<pre>$.post("api/index.php", data, function(data, status) {</pre>
+
+Merupakan fungsi jQuery untuk melakukan post ajax dan meminta callback di URL &#8220;api/index.php&#8221; yang selanjutnya akan ditampilkan berupa Objek Javascript, nah setelah proses nya berhasil akan masuk ke proses berikutnya dan mengeksekusi baris berikutnya.
+
+<pre>if(status == 'success' &#038;&#038; data.statuses.length > 0){
+
+                $('#export').show();
+                $('#loading').empty();
+                $('#showTable').append('
+
+<tr>
+  <th>
+    Name
+  </th>
+  
+  <th>
+    Username
+  </th>
+  
+  <th>
+    Profile Image
+  </th>
+  
+  <th>
+    Tweet
+  </th>
+  
+  <th>
+    Location
+  </th>
+  
+  <th>
+    Followers Count
+  </th>
+  
+  <th>
+    Friends Count
+  </th>
+  
+  <th>
+    Time Zone
+  </th>
+</tr>');
+               
+                $.each( data.statuses, function(i, item){
+                  $('#showTable').append('
+
+<tr>
+  <td>
+    '+item.user.name+'
+  </td>'+'
+  
+  <td>
+    &lt;a href="https://twitter.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);"+item.user.screen_name+'">'+item.user.screen_name+'&lt;/a>
+  </td>'+'
+  
+  <td class="text-center">
+    <img src="'+item.user.profile_image_url+'" />
+  </td>'+'
+  
+  <td>
+    '+item.text.autoLink({target: "_blank"})+'
+  </td>'+'
+  
+  <td>
+    '+item.user.location+'
+  </td>
+  
+  <td class="text-center">
+    '+item.user.followers_count+'
+  </td>
+  
+  <td class="text-center">
+    '+item.user.friends_count+'
+  </td>
+  
+  <td>
+    '+item.user.time_zone+'
+  </td>
+</tr>').hide().fadeIn();
+                });
+
+            } 
+</pre>
+
+Jika data berhasil maka data akan di tampilkan di atribut HTML 
+
+<pre>
+        <!-- show table result -->
+        
+</pre>
+
+Jika proses berhasil namun data-nya tidak tersedia akan masuk ke dalam proses selanjutnya
+
+<pre>else if(status == 'success' &#038;&#038; data.statuses.length &lt;= 0) {
+
+              $('#loading').empty();
+              $('#loading').append('Not Available!');
+
+            }
+</pre>
+
+Proses tersebut akan mengosongkan atribut html yang memiliki **id="loading"** dan memasukan text **Not Available** pada atribut HTML tersebut. Namun jika semua kondisi tidak terpenuhi atau terjadi error sewaktu proses maka akan masuk kedalam kondisi yang terakhir
+
+<pre>else {
+
+                console.log('ERROR!');
+                alert('ERROR!');
+            
+            }
+</pre>
+
+Kondisi diatas akan menampilkan teks error yang berupa **alert** di dalam browser dan menampilkan log error di browser
+
+## Penjelasan file api/index.php
+
+**Silahakn buat file index.php ini didalam API CLASS Twitter yang sudah kita download di**<a href="https://github.com/abraham/twitteroauth" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">https://github.com/abraham/twitteroauth</a> 
+
+<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+	require "autoload.php";
+	require "../config/config.php";
+	use Abraham\TwitterOAuth\TwitterOAuth;
+
+	$keyword = ( $_SERVER['REQUEST_METHOD'] == 'POST' ) ? $_POST['keyword'] : "bandung";
+	$count 	 = ( $_SERVER['REQUEST_METHOD'] == 'POST' ) ? $_POST['count'] : 10;				
+	$connection = new TwitterOAuth($config['CONSUMER_KEY'], $config['CONSUMER_SECRET'], $config['ACCESS_TOKEN'], $config['ACCESS_TOKEN_SECRET']);
+
+	// UNTUK MENCARI HASHTAG BISA MENGGUNAKAN TWITTER BY SEARCH
+
+	$content = $connection-&gt;get("search/tweets", ["q" =&gt; $keyword, "count" =&gt; $count]);
+
+	header('Content-Type: application/json');
+	echo json_encode($content); die;
+</pre>
+
+File ini berfungsi untuk menampilkan data yang diperoleh dari API Twitter yang telah kita buat sebelumnya. Variable **$keyword** berupa kondisi jika ada data yang di pos melalui input text maka akan menggunakan data POST tersebut dan jika tidak maka akan menggunakan nilai default dari variable tersebut yaitu berupa string **bandung** dan akan menampilkan tweet yang ada kata2 **"bandung"** . Setelah itu variable **$count** akan mengambil data POST yang kita post kan melalui atribut select HTML dan jika tidak ada data yang di pos kan akan mengambil nilai default dari variable tersebut yaitu **10**.
+
+Selanjutnya variable **$connection** akan mengeksekusi class **TwitterOAuth** dengan parameter CONSUMER\_KEY, CONSUMER\_SECRET, ACCESS\_TOKEN dan ACCESS\_TOKEN_SECRET yang sudah kita set sebelumnya.
+
+Terakhir untuk variable **$content** akan mengeksekusi METHOD **get** dari CLASS TwitterOAuth yang sudah kita jadikan variable **$connection** sebelumnya. Setelah itu menampilkan data tersebut ke dalam **JSON** dengan menggunakan fungsi PHP **json_encode**.
+
+**Silahkan download assets nya disini**
+
+<a href="http://www.hitamcoklat.com/download/?b4bd1746b85fbf4fc0178466708a06dc" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.hitamcoklat.com']);">DOWNLOAD ASSETS</a>
+
+Ohh ya untuk struktur tree folder nya seperti berikut ya  <img src='http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' />
+
+<pre>.
+├── api
+│   ├── autoload.php
+│   ├── composer.json
+│   ├── index.php
+│   ├── LICENSE.md
+│   ├── phpmd.xml
+│   ├── phpunit.xml
+│   ├── README.md
+│   ├── src
+│   │   ├── cacert.pem
+│   │   ├── Config.php
+│   │   ├── Consumer.php
+│   │   ├── HmacSha1.php
+│   │   ├── Request.php
+│   │   ├── Response.php
+│   │   ├── SignatureMethod.php
+│   │   ├── Token.php
+│   │   ├── TwitterOAuthException.php
+│   │   ├── TwitterOAuth.php
+│   │   ├── Util
+│   │   │   └── JsonDecoder.php
+│   │   └── Util.php
+│   └── tests
+│       ├── AbstractSignatureMethodTest.php
+│       ├── bootstrap.php
+│       ├── ConsumerTest.php
+│       ├── HmacSha1Test.php
+│       ├── kitten.jpg
+│       ├── sample_env
+│       ├── TokenTest.php
+│       ├── TwitterOAuthTest.php
+│       ├── Util
+│       │   └── JsonDecoderTest.php
+│       └── video.mp4
+├── assets
+│   ├── css
+│   │   ├── bootstrap.min.css
+│   │   └── styles.css
+│   ├── img
+│   │   └── logo.png
+│   └── js
+│       ├── autolink-min.js
+│       ├── bootstrap.min.js
+│       └── jquery.js
+├── config
+│   └── config.php
+├── index.php
+</pre>
+
+**Folder api berisi API TWITTER yang sudah kita download di github tadi**
+
+Gimana? sampai disini ada pertanyaan atau masih bingung?  <img src='http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' />. Silahkan komentar dibawah ya

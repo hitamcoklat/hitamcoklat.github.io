@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title> Membuat Toko Online &amp;#8211; PHP dan MySQL Part 2</title><meta name="description" content="Pada postingan sebelumnya telah dibahas mengenai pembuatan template sederhana untuk toko online ini. Pada bagian ini akan dibahas mengenai konfigurasi file d..."><link rel="canonical" href="http://localhost:4000/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/"><link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml"><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|Roboto+Condensed:700&subset=latin' rel='stylesheet' type='text/css'><link rel="stylesheet" href="http://localhost:4000/assets/css/main.css"><meta property="og:url" content="http://localhost:4000/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/"><meta property="og:type" content="website"><meta property="og:title" content="Membuat Toko Online &#8211; PHP dan MySQL Part 2"><meta property="og:description" content=""><meta property="og:site_name" content="Your awesome title"><meta name="twitter:card" content="summary"><meta name="twitter:url" content="http://localhost:4000/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/"><meta name="twitter:title" content="Membuat Toko Online &#8211; PHP dan MySQL Part 2"><meta name="twitter:description" content=""><meta property="og:image" content="http://localhost:4000/assets/images/bg.svg"><meta name="twitter:image" content="http://localhost:4000/assets/images/bg.svg"><body><div id="shadow"></div><header class="main-header content-wrapper"> <input type="checkbox" id="menu-checkbox" /><nav class="center-wrapper nav-main"> <a class="blog-logo" href="/">Your awesome title</a> <a href="/about/">About</a> <a href="/posts/">Archive</a> <a href="/feed.xml">RSS</a> <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label></nav></header><aside class="sidebar" role="note" style="background-image: url(http://localhost:4000/assets/images/bg.svg)"><div class="cover"><div class="cover-text"><div class="heading"> <a href="/posts/#membuat toko online">membuat toko online</a> <a href="/posts/#membuat toko online - php dan mysql">membuat toko online - php dan mysql</a> <a href="/posts/#membuat toko online - php dan mysql part 2">membuat toko online - php dan mysql part 2</a></div><p></div></div><div id="switcher"></div></aside><main class="content-wrapper"><article class="post"><h1 class="post-title">Membuat Toko Online &#8211; PHP dan MySQL Part 2</h1><p class="post-meta"> <time datetime="2012-10-04">04-10-2012</time> &nbsp;/&nbsp; <span>admin</span><div class="post-content"><p>Pada postingan sebelumnya telah dibahas mengenai pembuatan template sederhana untuk toko online ini. Pada bagian ini akan dibahas mengenai konfigurasi file dan desain database nya. Pada bagian_<strong> Membuat Toko Online – PHP dan MySQL Part 2 </strong>_pertama-tama saya akan membahas cara pembuatan database terlebih dahulu untuk memberikan bayangan mengenai sistem yang akan kita buat nanti. Oh ya sebelumnya jika kamu sudah membuat tampilan HTML+CSS nya di <strong><a href="#">Membuat Toko Online – PHP dan MySQL Part 2</a> </strong>mungkin akan ada beberapa hal yang akan berbeda di tahap** <a href="#">Membuat Toko Online – PHP dan MySQL Part 2</a> **karena dalam tahap ini saya akan membagi bagian template-nya ke dalam beberapa bagian (dimaksudkan untuk dapat lebih mudah dalam pengembangan dan maintanance nanti) baiklah langsung aja check it out.<p><a href="http://hitamcoklat.com/wp-content/uploads/2012/10/Drawing1.png" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[525]" title="Drawing1"><img class="alignnone size-full wp-image-998" title="Drawing1" src="http://hitamcoklat.com/wp-content/uploads/2012/10/Drawing1.png" alt="" width="382" height="520" /></a><h2 id="membuat-tabel-database">Membuat Tabel Database</h2><h3 id="tabel-8211-category">tabel – category</h3><pre class="brush: sql; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+</pre><h3 id="tabel-8211-keranjang">Tabel – Keranjang</h3><pre class="brush: sql; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `keranjang` (
+  `id_keranjang` int(5) NOT NULL AUTO_INCREMENT,
+  `id_product` int(5) NOT NULL,
+  `id_session` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `tgl_keranjang` date NOT NULL,
+  `qty` int(4) NOT NULL,
+  PRIMARY KEY (`id_keranjang`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=394 ;
+</pre><h3 id="tabel-8211-order-product">Tabel – Order Product</h3><pre class="brush: sql; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `order_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int(11) NOT NULL,
+  `id_pemesan` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` text NOT NULL,
+  `phone` int(20) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'New',
+  `jumlah` int(4) NOT NULL,
+  `tanggal` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
+</pre><h3 id="tabel-8211-product">Tabel – Product</h3><pre class="brush: sql; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `product` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`product_name` varchar(100) NOT NULL,
+`price` int(20) NOT NULL,
+`image` varchar(1000) NOT NULL,
+`id_category` int(11) NOT NULL,
+`deskripsi` text NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+</pre><h3 id="tabel-8211-user">Tabel – User</h3><pre class="brush: sql; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `user` (
+  `id_user` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `password` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `level` varchar(50) COLLATE latin1_general_ci NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+</pre><h2 id="membuat-file-konfigurasi">Membuat File Konfigurasi</h2><p>Langkah selanjutnya adalah membuat file-file konfigurasi yang dibutuhkan dalam pembuatan Toko Online ini, seperti<ul><li>Membuat fungsi PHP yang dibutuhkan<li>Memisahkan file-file PHP kedalam bagian-bagian terkecil atau biasa disebut dengan teknik modulasi</ul><p>Sebelum melangkah pada pembuatan fungsi PHP buatlah terlebih dahulu folder dan file yang dapat dilihat hasilnya pada gambar dibawah ini,<p><a href="http://hitamcoklat.com/wp-content/uploads/2012/10/Untitled.png" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[525]" title="Gambar Folder"><img class="aligncenter size-full wp-image-537" title="Gambar Folder" src="http://hitamcoklat.com/wp-content/uploads/2012/10/Untitled.png" alt="Gambar Folder" width="312" height="258" /></a><p>Setelah dibuat folder dan filenya, ayoo kita lanjutkan pada tahap selanjutnya (semoga masih semangat yaaaa…! <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />). Bukalah folder <strong>“include” </strong>dan buatlah sebuah file diberi nama <strong>lib.php</strong>, isilah file tersebut dengan fungsi-fungsi berikut ini.<h3 id="libphp">lib.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;!--?php $seminggu = array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"); $hari = date("w"); $hari_ini = $seminggu[$hari]; $tgl_sekarang = date("Ymd"); $thn_sekarang = date("Y"); $jam_sekarang = date("H:i:s"); $nama_bln=array(1=--&gt; "Januari", "Februari", "Maret", "April", "Mei",
+                    "Juni", "Juli", "Agustus", "September",
+                    "Oktober", "November", "Desember");
+//fungsi untuk keranjang belanja
+function cart_content(){
+	$ct_content = array();
+	$sid = session_id();
+	$sql = mysql_query("SELECT * FROM keranjang WHERE id_session='$sid'");
+	while ($r=mysql_fetch_array($sql)) {
+		$ct_content[] = $r;
+	}
+	return $ct_content;
+}
+//fungsi untuk menghapus keranjang
+function deletecart(){
+	$del = date('Y-m-d', mktime(0,0,0, date('m'), date('d') - 1, date('Y')));
+	mysql_query("DELETE FROM keranjang WHERE tgl_keranjang &lt; '$del'"); 	} //fungsi untuk membuat koneksi database ke server function koneksi() { 	$server = "localhost"; 	$username = "root"; 	$password = ""; 	$database = "toko2"; 	mysql_connect($server,$username,$password) or die("Koneksi gagal"); 	mysql_select_db($database) or die("Database tidak bisa dibuka"); } ?&gt;
+</pre><p>ya…!! dalam membuat toko online ini fungsi diatas akan menjadi pilar dalam sistem toko online ini, selanjutnya kita akan masuk ke dalam tahap cara menggunakan teknik modulasi yang menurut saya sangat bermanfaat untuk membuat aplikasi web. Karena dengan teknik modulasi ini kita dapat mudah dalam melakukan pengembangan dan perawatan suatu aplikasi web, oh ya <strong>teknik modulasi ini merupakan suatu teknik pemisahan sebuah aplikasi menjadi bagian-bagian kecil</strong>…hhmmm, mungkin terlalu panjang bahasannya ya hehe, langsung ajalah buat file-file dibawah ini didalam folder <strong>“include” :</strong><ol><li>bottom.php<li>cart.php<li>cart2.php<li>home.php<li>left.php<li>order.php<li>product.php<li>top.php</ol><p>Jika sudah dibuat, silahkan file tersebut isikan dengan syntax berikut,<h3 id="bottomphp">bottom.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="footer"&gt;
+© &lt;!--?php echo date('Y') ?--&gt; Membuat Sistem Shopping Cart | PHP dan MySQL Developed by &lt;a href="http://www.hitamcoklat.com/"&gt;hitamcoklat&lt;/a&gt;&lt;/div&gt;
+&lt;pre&gt;
+
+</pre><p>File diatas berfungsi untuk menampilkan bagian bawah website toko online ini.<h3 id="cartphp">cart.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="BigContent"&gt;
+&lt;div class="RightContent"&gt;
+&lt;h1 class="Judul"&gt;Shopping Cart&lt;/h1&gt;
+&lt;div class="KetProd"&gt;$sid = session_id(); $no = 1; $sql = mysql_query("SELECT * FROM keranjang, product WHERE id_session='$sid' AND keranjang.id_product=product.id"); $hitung = mysql_num_rows($sql); if ($hitung &lt; 1){echo""; } else { while($tian=mysql_fetch_array($sql)){ echo""; $no++; } } ?&gt;
+&lt;table class="TableCart" style="border-top: 1px dotted #0; border-bottom: 1px dotted #0;" width="100%" border="0" cellspacing="0" cellpadding="0"&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;No&lt;/th&gt;
+&lt;th&gt;Foto Produk&lt;/th&gt;
+&lt;th&gt;Nama Produk&lt;/th&gt;
+&lt;th&gt;Jumlah&lt;/th&gt;
+&lt;th&gt;Harga&lt;/th&gt;
+&lt;th&gt;Delete&lt;/th&gt;
+&lt;!--?php &lt;br ?--&gt;
+&lt;td&gt;$no&lt;/td&gt;
+&lt;td&gt;&lt;img src="foto/$tian[image]" alt="" width="50" /&gt;&lt;/td&gt;
+&lt;td&gt;$tian[product_name]&lt;/td&gt;
+&lt;td&gt;$tian[qty]&lt;/td&gt;
+&lt;td&gt;$tian[price]&lt;/td&gt;
+&lt;td&gt;&lt;a href="input.php?input=delete&amp;id=$tian[id_keranjang]"&gt;Hapus&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ &lt;a class="tombol" href="?v=order"&gt;Selesai&lt;/a&gt;
+ &lt;a class="tombol" href="index.php"&gt;Belanja Lagi..&lt;/a&gt;&lt;/div&gt;
+</pre><p>File diatas berfungsi untuk menampilkan produk yang sudah dimasukan ke dalam keranjang<h3 id="cart2php">cart2.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;!--?php &lt;br ?--&gt;include "inc/koneksi.php";
+	$sid = session_id();
+	$sql = mysql_query("SELECT * FROM keranjang");
+	$row = mysql_num_rows($sql);
+	$jml = mysql_fetch_array($sql);
+
+	echo "&lt;span class="KetCart"&gt;$row item&lt;/span&gt;";
+	?&gt;
+</pre><p>File diatas berfungsi untuk menampilkan produk yang telah dimasukan kedalam tabel keranjang dan menghitungnya dengan menggunakan fungsi <em><strong>mysql_num_rows()</strong></em><h3 id="homephp">home.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="BigContent"&gt;
+&lt;div class="RightContent"&gt;
+&lt;h1 class="Judul"&gt;Produk terbaru&lt;/h1&gt;
+&lt;!--?php 	$sql = mysql_query("SELECT * FROM product ORDER BY id DESC") or die ("Query gagal dengan error: ".mysql_error()); 	while($data=mysql_fetch_array($sql)){ ?--&gt;
+&lt;div class="produk"&gt;&lt;a href="?v=produk&amp;id=&lt;?php echo $data['id']; ?&gt;"&gt;
+ &lt;img class="FotoProduk" title="&lt;?php echo $data['product_name']; ?&gt;" src="foto/&lt;?php echo $data['image']; ?&gt;" alt="" height="110px" /&gt;
+ &lt;/a&gt;
+ &lt;br class="clearfloat" /&gt;
+&lt;div class="KotakKet"&gt;&lt;a class="pesanprod" href="input.php?input=add&amp;id=&lt;?php echo $data['id']; ?&gt;"&gt;Pesan&lt;/a&gt;
+ &lt;a class="detprod" href="product.php?id=&lt;?php echo $data['id']; ?&gt;"&gt;Detail&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!--?php } ?--&gt;
+</pre><h3 id="leftphp">left.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="LeftContent"&gt;
+&lt;div id="navigation"&gt;
+&lt;ul class="top-level"&gt;
+&lt;ul class="top-level"&gt;&lt;!--?php &lt;br ?--&gt; $kat = mysql_query("SELECT category, category.id from category join product on product.id_category=category.id group by category");&lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class="top-level"&gt;
+&lt;ul class="top-level"&gt;while($list=mysql_fetch_array($kat)){&lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class="top-level"&gt;
+&lt;ul class="top-level"&gt;echo"
+	&lt;li&gt;&lt;a href="?v=produk&amp;cat=$list[id]"&gt;$list[category]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class="top-level"&gt;
+&lt;ul class="top-level"&gt;";&lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class="top-level"&gt;
+&lt;ul class="top-level"&gt;}&lt;/ul&gt;
+&lt;/ul&gt;
+&lt;ul class="top-level"&gt;?&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;pre&gt;
+</pre><p>File diatas berfungsi untuk menampilkan menu kategori dari tabel category dengan menggabungkan tabel product, dapat dilihat dari syntax mysqlnya,<pre>mysql_query("SELECT category, category.id from category join product on product.id_category=category.id group by category");</pre><h3 id="orderphp">order.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="BigContent"&gt;
+&lt;div class="RightContent"&gt;
+&lt;h2 class="Judul"&gt;Form Pemesanan&lt;/h2&gt;
+&lt;form action="input.php?input=inputform" method="post"&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Nama&lt;/td&gt;
+&lt;td&gt;&lt;input class="form" type="text" name="name" /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Email&lt;/td&gt;
+&lt;td&gt;&lt;input class="form" type="text" name="email" /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alamat&lt;/td&gt;
+&lt;td&gt;&lt;textarea class="form" name="address" rows="7" cols="40"&gt;&lt;/textarea&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;No HP&lt;/td&gt;
+&lt;td&gt;&lt;input class="form" type="text" name="telp" /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;input type="submit" name="submit" value="order" /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+</pre><p>File diatas berfungsi sebagai form dengan tujuan file yaitu<strong> <em>input.php.</em></strong><h3 id="productphp">product.php</h3><p>File ini berfungsi untuk menampilkan produk per kategori dan produk inti,<pre class="brush: php; title: ; notranslate" title="">&lt;/pre&gt;
+&lt;div class="BigContent"&gt;
+&lt;div class="RightContent"&gt;&lt;!--?php &lt;br ?--&gt; $prod = $_GET['id'];
+ $cat = $_GET['cat'];
+ if($cat){
+ $sql = mysql_query("SELECT * FROM category WHERE id = '$cat'"); //untuk mengambil tabel kategori berdasarkan id
+ $jdl = mysql_fetch_array($sql);
+ echo "
+&lt;h1 class="Judul"&gt;Kategori $jdl[category]&lt;/h1&gt;
+";
+ $sql2 = mysql_query("SELECT * FROM product WHERE id_category='$cat'");
+ while($t = mysql_fetch_array($sql2)){ ?&gt;
+&lt;div class="produk"&gt;&lt;a href="?v=produk&amp;id=&lt;?php echo $t['id']; ?&gt;"&gt;
+ &lt;img class="FotoProduk" title="&lt;?php echo $t['product_name']; ?&gt;" src="foto/&lt;?php echo $t['image']; ?&gt;" alt="" height="110px" /&gt;
+ &lt;/a&gt;
+ &lt;br class="clearfloat" /&gt;
+&lt;div class="KotakKet"&gt;&lt;a class="pesanprod" href="input.php?input=add&amp;id=&lt;?php echo $t['id']; ?&gt;"&gt;Pesan&lt;/a&gt;
+ &lt;a class="detprod" href="?v=produk&amp;id=&lt;?php echo $t['id']; ?&gt;"&gt;Detail&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!--?php 	} } elseif($prod){ ?--&gt;
+&lt;!--?php //jika variable cat tidak terdefinisikan maka lanjut ke proses dibawah ini 	$sql = mysql_query("SELECT * FROM product WHERE id='$prod'"); 	$d = mysql_fetch_array($sql); 	?--&gt;
+&lt;h1 class="Judul"&gt;Produk &lt;!--?php echo $d['product_name']; ?--&gt;&lt;/h1&gt;
+&lt;div class="KetProd"&gt;&lt;img class="GambarKetProd" src="foto/&lt;?php echo $d['image']; ?&gt;" alt="" /&gt;
+ &lt;!--?php echo $d['deskripsi']; ?--&gt;&lt;/div&gt;
+ &lt;a class="haha" href="javascript:history.go(-1)"&gt;Kembali&lt;/a&gt; | &lt;a class="haha" href="input.php?input=add&amp;id=&lt;?php echo $d['id']; ?&gt;"&gt;Beli&lt;/a&gt;
+&lt;!--?php } ?--&gt;
+</pre><h3 id="topphp">top.php</h3><pre class="brush: php; title: ; notranslate" title="">&lt;!--?php 	error_reporting(0); 	session_start(); 	?--&gt;
+
+		Toko Online
+&lt;/pre&gt;
+&lt;div class="wrap"&gt;
+&lt;div class="header"&gt;
+&lt;div class="LeftOne"&gt;&lt;a href="index.php"&gt;&lt;img src="images/toko-online.png" alt="" width="150px" /&gt;&lt;/a&gt;&lt;/div&gt;
+&lt;div class="RightOne"&gt;
+&lt;div class="cart"&gt;&lt;/div&gt;
+ &lt;br class="clearfloat" /&gt;
+ &lt;a class="tocart" href="cart.php"&gt;Keranjang&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+ &lt;br class="clearfloat" /&gt;
+</pre><p>Dari syntax diatas dapat dilihat bahwa terdapat 2 alur pengerjaannya, yaitu jika kondisi pertama (yaitu variable <strong>cat</strong> dimana dihasilkan dari parameter URL) terpenuhi maka akan melanjutkan query pengambilan kategori dan apabila kondisi kedua (dimana variable <strong>cat </strong>tidak terdefinisikan) maka akan akan melanjutkan query pengambilan produk berdasarkan_ <strong>id.</strong>_ Dilanjutkan di bagian “<a title="Membuat Toko Online – PHP dan MySQL Part 3" href="http://hitamcoklat.com/2012/10/12/membuat-toko-online-php-dan-mysql-part-3/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);"><strong>Membuat Toko Online PHP dan MySQL Part3</strong></a>” ya <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><p>Ohh ya jika ada pertanyaan seputar pembuatan toko online ini silahkan isi komentar. <a class="link-to-post" href="/2012/10/03/10-template-website-portofolio-terbaik-gratis/"> <span class="link-to-post__next">&#10535; &nbsp;Next post</span> <span class="link-to-post__title">10 Template Website Portofolio Terbaik &#8211; Gratis</span> </a> <a class="link-to-post" href="/2012/10/03/membuat-toko-online-php-dan-mysql-part-1/"> <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span> <span class="link-to-post__title">Membuat Toko Online &#8211; PHP dan MySQL Part 1</span> </a></div></article><div id="disqus_thread"></div><script> /** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */ /* var disqus_config = function () { this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable }; */ (function() { // DON'T EDIT BELOW THIS LINE var d = document, s = d.createElement('script'); s.src = '//hitamcoklat.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> <script id="dsq-count-scr" src="//hitamcoklat.disqus.com/count.js" async></script></main><footer class="blog-footer content-wrapper"><p>&copy; <span class="full-year"></span> Your awesome title</footer><script src="/assets/js/scripts.js"></script>

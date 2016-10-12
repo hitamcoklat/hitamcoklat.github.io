@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title> Mengecek Online User Unik PHP dan MySQL + AJAX Simple</title><meta name="description" content="Pada postingan kali ini saya akan mencoba mengulas mengenai pengecekan pengguna atau pengecekan user yang sedang online dalam website kita. Ohh ya sebelumnya..."><link rel="canonical" href="http://localhost:4000/2013/04/14/mengecek-online-user-unik-php-dan-mysql-ajax-simple/"><link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml"><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|Roboto+Condensed:700&subset=latin' rel='stylesheet' type='text/css'><link rel="stylesheet" href="http://localhost:4000/assets/css/main.css"><meta property="og:url" content="http://localhost:4000/2013/04/14/mengecek-online-user-unik-php-dan-mysql-ajax-simple/"><meta property="og:type" content="website"><meta property="og:title" content="Mengecek Online User Unik PHP dan MySQL + AJAX Simple"><meta property="og:description" content=""><meta property="og:site_name" content="Your awesome title"><meta name="twitter:card" content="summary"><meta name="twitter:url" content="http://localhost:4000/2013/04/14/mengecek-online-user-unik-php-dan-mysql-ajax-simple/"><meta name="twitter:title" content="Mengecek Online User Unik PHP dan MySQL + AJAX Simple"><meta name="twitter:description" content=""><meta property="og:image" content="http://localhost:4000/assets/images/bg.svg"><meta name="twitter:image" content="http://localhost:4000/assets/images/bg.svg"><body><div id="shadow"></div><header class="main-header content-wrapper"> <input type="checkbox" id="menu-checkbox" /><nav class="center-wrapper nav-main"> <a class="blog-logo" href="/">Your awesome title</a> <a href="/about/">About</a> <a href="/posts/">Archive</a> <a href="/feed.xml">RSS</a> <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label></nav></header><aside class="sidebar" role="note" style="background-image: url(http://localhost:4000/assets/images/bg.svg)"><div class="cover"><div class="cover-text"><div class="heading"> <a href="/posts/#mengecek online user unik php dan mysql + ajax simple">mengecek online user unik php dan mysql + ajax simple</a> <a href="/posts/#online user php">online user php</a> <a href="/posts/#online user php dan mysql">online user php dan mysql</a></div><p></div></div><div id="switcher"></div></aside><main class="content-wrapper"><article class="post"><h1 class="post-title">Mengecek Online User Unik PHP dan MySQL + AJAX Simple</h1><p class="post-meta"> <time datetime="2013-04-15">15-04-2013</time> &nbsp;/&nbsp; <span>admin</span><div class="post-content"><p>Pada postingan kali ini saya akan mencoba mengulas mengenai pengecekan pengguna atau pengecekan user yang sedang online dalam website kita. Ohh ya sebelumnya saya sebelumnya saya memposting mengenai hal ini mungkin terinspirasi oleh seorang teman yang bertanya kepada saya tentang cara bagaiman untuk mengetahui pengunjung yang sedang online di website kita. Mungkin sudah tidak asing lagi yaa.. dengan judul yang satu ini, dan mungkin agan – agan dan aganwati <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />sekalian udah pada tahu bagaimana cara membuatnya.<p>Tetapi pada kasus ini saya akan mengintegrasikannya dengan AJAX, kenapa harus sambil menggunakan AJAX?? ohh ya jadi begini ceritanya.., berawal ketika saya membuat kode standar untuk membuat pengecekan online user dan ketika itu semuanya berjalan dengan lancar dalam kasus ini saya menggunakan 2 browser. Ketika saya buka browser skrip nya berjalan dengan baik dan menunjukan 2 pengunjung yang sedang online. Tapi setelah browser ke-dua saya tutup window-nya, pada browser pertama tadi tetap menampilkan dua pengunjung yang sedang online hingga saya me-refresh browser pertama tadi jadii dengan AJAX ini kita tidak perlu me-refresh lagi untuk mengecek berapa orang yang benar-benar online pada waktu tersebut <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" />.<p><a href="http://hitamcoklat.com/wp-content/uploads/2013/04/close_pointer.jpg" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[812]" title="close_pointer"><img class="aligncenter size-full wp-image-823" title="close_pointer" src="http://hitamcoklat.com/wp-content/uploads/2013/04/close_pointer.jpg" alt="close_pointer" width="409" height="229" /></a><p>Ohh ya sebelumnya bisa dikatakan unik karena saya menggunakan fungsi dari pengambilan <strong>session_id</strong> untuk mebuat setiap browser tampak unik selain itu skrip ini juga mirip – mirip dengan aplikasi chating yang ketika kita menutup jendela obrolan kita maka pengunjung yang sedang online akan berkurang…bagaimana? asyikan? hahah maaf saya terlalu lebay hehe…Oke langsung aja ke pembahasan ya, Cekidot ikuti langkah dibawah ini…<h2 id="pembuatan-table">1.Pembuatan Table</h2><p>Berikut adalah gambar penampakan table yang akan dibuat..<p><a href="http://hitamcoklat.com/wp-content/uploads/2013/04/g_table.jpg" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[812]" title="g_table"><img class="aligncenter size-full wp-image-817" title="g_table" src="http://hitamcoklat.com/wp-content/uploads/2013/04/g_table.jpg" alt="g_table" width="390" height="83" /></a><p>karena kita akan membuat skrip online usernya yang simple, jadi saya kira sudah lebih dari cukup untuk menggunakan dua field saja hehe <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />, Untuk sintaks MySQL nya silahkan lihat dibawah ini…<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE IF NOT EXISTS `online_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_session` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+</pre><h2 id="file-koneksiphp">2. File koneksi.php</h2><p>Seperti biasa kita buat file koneksi secara terpisah <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><pre class="brush: php; title: ; notranslate" title="">&lt;?php
+
+	$host ='localhost';
+	$user ='root';
+	$pass ='';
+	$dbase   ='herey';
+
+	$koneksi = mysql_connect($host, $user, $pass);
+	
+	if (!$koneksi)
+	{
+		die ('Tidak Bisa Konek: ' . mysql_error());
+	}
+	
+	mysql_select_db($dbase, $koneksi);
+	
+?&gt;
+</pre><h2 id="file-cekonlinephp">4.File cekOnline.php</h2><p>File ini berfungsi untuk mengecek apakah user sedang online atau tidak dengan cara melakukan pengecekan ke dalam tabel.<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+include "koneksi.php";
+
+$query = mysql_query("SELECT * FROM online_user");
+
+$hitung = mysql_num_rows($query);
+
+echo $hitung;
+?&gt;
+</pre><p>dapat dilihat bahwa kita menggunakan fungsi <strong>mysql_num_rows() </strong>untuk menghitung jumlah rows yang ada dalam table yang dengan kata lain merupakan jumlah user yang sedang online <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><h2 id="file-onlinephp">5. File online.php</h2><p>File ini berfungsi untuk memasukan nilai kedalam tabel.<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+
+include "koneksi.php";
+
+session_start();
+
+$id_saya = session_id();
+
+$query = mysql_query("SELECT id_session FROM online_user WHERE id_session = '".$id_saya."'");
+
+$query2 = mysql_fetch_array($query);
+
+if ($query2 == null)
+{
+	mysql_query("INSERT INTO online_user (id, id_session) VALUES ('', '$id_saya')");
+}
+
+
+?&gt;
+</pre><p>Dapat dilihat bahwa pada awal – awal baris kita menggunakan fungsi session yaitu <strong>session_start() </strong>yang berguna untuk memulai session dan mengecek setiap user yang unik atau berbeda seperti yang sudah dijelaskan diatas hehe <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />. Jika dijelaskan skrip diatas adalah kita akan melakukan insert query kedalam table jika <strong>id_session</strong> tidak sama dengan variable <strong>$id_saya</strong> yang berarti browser yang kita pakai <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /><h2 id="file-exitphp">6. File exit.php</h2><p>File ini berguna untuk menghapus sesi online kita.<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+
+session_start();
+
+$id_saya = session_id();
+
+include "koneksi.php";
+
+mysql_query("DELETE FROM online_user WHERE id_session='".$id_saya."'");
+
+session_destroy();
+
+?&gt;
+</pre><h2 id="file-indexphp">7. File index.php</h2><p>File ini berfungsi untuk menampilkan pengunjung yang online, ohh ya file nya disatuin aja yaa sama javascriptnya biar agak jelas hehe..<pre class="brush: php; title: ; notranslate" title="">&lt;html&gt;
+	&lt;head&gt;
+		&lt;script&gt;
+            //Skirp yang wajib ada jika ingin menggunakan AJAX
+            function GetXmlHttpObject()
+                {
+                var xmlHttp;
+
+                try
+                    {
+                    // Firefox, Opera 8.0+, Safari
+                    xmlHttp = new XMLHttpRequest();
+                    }
+                catch (e)
+                    {
+                    //Internet Explorer
+                    try
+                        {
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                        }
+                    catch (e)
+                        {
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                    }
+
+                return xmlHttp;
+                }
+				
+			function cekOnline()
+			{
+				xmlHttp = GetXmlHttpObject();
+				
+				if (xmlHttp == null)
+				{
+					alert("Browser Anda Tidak Mendukung HTTP Request");
+					return;
+				}
+				
+				var url = "cekOnline.php";
+				xmlHttp.open("POST", url, true);
+				xmlHttp.onreadystatechange = stateChanged;
+				xmlHttp.send(null);
+			}
+			
+            function stateChanged()
+                {
+                if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+                    {
+                    var hitung = xmlHttp.responseText;
+                    document.getElementById("jumlahOnline").innerHTML = "&lt;font color='red'&gt;" + hitung + "&lt;/font&gt; user online";
+                    window.setTimeout("cekOnline();", 2000);
+                    }
+                }
+			
+			function online()
+			{
+                online = GetXmlHttpObject();
+
+                if (online == null)
+                    {
+                    alert("Browser Anda Tidak Mendukung HTTP Request");
+                    return;
+                    }
+
+                var url = "online.php";
+                online.open("POST", url, true);
+                online.onreadystatechange = responeOnline;
+                online.send(null);
+			}
+			
+			function responeOnline()
+			{
+                if (online.readyState == 4 || online.readyState == 0)
+                    {
+                    cekOnline();
+                    }
+			}
+						
+			function exit()
+			{
+				exit = GetXmlHttpObject();
+				
+				if (exit == null)
+				{
+					alert("Browser Tidak Support HTTP Request");
+					return;
+				}
+				
+				var url = "exit.php";
+				exit.open("POST", url, true);
+				exit.send(null);
+			}
+						
+		&lt;/script&gt;
+	&lt;/head&gt;
+	
+	&lt;body onload="online();" onbeforeunload="exit();"&gt;
+		&lt;h1&gt;Yang sekarang sedang Online adalah: &lt;span id="jumlahOnline"&gt;&lt;/span&gt; &lt;/h1&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>Baiklah dapat dilihat bahwa pada<ul><li>Baris ke 5 sampai baris ke 28 merupakan baris yang biasa digunakan dalam menggunakan AJAX, yaitu pendeklarasian penggunaan dalam XMLHttpRequest yang dilakukan didalam sebuah javascript..<li>Baris ke 30 sampai 54 merupakan fungsi untuk membuat request ke server untuk mebuka file <strong>cekOnline.php</strong> setelah itu pada baris ke 46 akan mengupdate data dengan elemen di html yang memiliki <strong>id=”jumlahOnline”</strong><li>Pada baris ke 56 sampai baris 78 merupkan fungsi untuk membuat request ke server untuk membuka file online.php yang didalam file tersebut sudah dijelaskan diatas yaitu untuk memasukan nilai user yang sedang online yang setelah itu membuat respon pada fungsi <strong>responOnline()</strong><li>Baris 80 sampai baris 93 merupakan fungsi untuk membuat request ke server untuk membuka file file exit.php yang berfungsi untuk melakukan delete rows pada table yang memiliki nilai dari id_session kita..<li>Baris ke 98 merupakan tag HTML body yang memiliki <strong>onload event</strong> yang berfungsi ketika halaman di load maka jalankan fungsi <strong>online()</strong> dan <strong>onbeforeunload</strong> event yang berfungsi untuk menjalankan fungsi <strong>exit()</strong><li>Baris ke 99 terlihat tag HTML **<span>** yang memiliki attribut <strong>id=”jumlahOnline”</strong> yang berfungsi untuk menampilkan jumlah user yang sedang online dengan memanfaatkan <strong>fungsi jumlahOnline</strong> tadi <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /></span></ul><div> Ohh ya untuk penampakannya seperti nampak pada gambar dibawah ini&#8230;</div><div> <a href="http://hitamcoklat.com/wp-content/uploads/2013/04/online_user.jpg" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[812]" title="online_user"><img class="aligncenter size-full wp-image-827" title="online_user" src="http://hitamcoklat.com/wp-content/uploads/2013/04/online_user.jpg" alt="online_user" width="515" height="175" /></a></div><p>Keterangan:<p>Ohh ya karena dalam skrip ini memanfaatkan event onbeforeunload() oleh karenan itu skrip ini akan berjalan dengan baik jika menggunakan chrome dan internet explorer <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /><p>Salam Blogger! <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> <a class="link-to-post" href="/2013/06/14/membuat-image-hosting-menggunakan-php/"> <span class="link-to-post__next">&#10535; &nbsp;Next post</span> <span class="link-to-post__title">Membuat Image Hosting Menggunakan PHP</span> </a> <a class="link-to-post" href="/2013/04/06/tools-gratis-untuk-memulai-web-freelance/"> <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span> <span class="link-to-post__title">Tools Gratis Untuk Memulai Web Freelance</span> </a></div></article><div id="disqus_thread"></div><script> /** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */ /* var disqus_config = function () { this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable }; */ (function() { // DON'T EDIT BELOW THIS LINE var d = document, s = d.createElement('script'); s.src = '//hitamcoklat.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> <script id="dsq-count-scr" src="//hitamcoklat.disqus.com/count.js" async></script></main><footer class="blog-footer content-wrapper"><p>&copy; <span class="full-year"></span> Your awesome title</footer><script src="/assets/js/scripts.js"></script>

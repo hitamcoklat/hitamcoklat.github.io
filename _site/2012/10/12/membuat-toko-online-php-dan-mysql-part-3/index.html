@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title> Membuat Toko Online – PHP dan MySQL Part 3</title><meta name="description" content="Akhirnya sampai juga pada pembuatan toko online part ke-3 setelah menunggu dan mengelak dari beberapa aktifitas di kampus dan di jalanan heheh . Baiklah pad..."><link rel="canonical" href="http://localhost:4000/2012/10/12/membuat-toko-online-php-dan-mysql-part-3/"><link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml"><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|Roboto+Condensed:700&subset=latin' rel='stylesheet' type='text/css'><link rel="stylesheet" href="http://localhost:4000/assets/css/main.css"><meta property="og:url" content="http://localhost:4000/2012/10/12/membuat-toko-online-php-dan-mysql-part-3/"><meta property="og:type" content="website"><meta property="og:title" content="Membuat Toko Online – PHP dan MySQL Part 3"><meta property="og:description" content=""><meta property="og:site_name" content="Your awesome title"><meta name="twitter:card" content="summary"><meta name="twitter:url" content="http://localhost:4000/2012/10/12/membuat-toko-online-php-dan-mysql-part-3/"><meta name="twitter:title" content="Membuat Toko Online – PHP dan MySQL Part 3"><meta name="twitter:description" content=""><meta property="og:image" content="http://localhost:4000/assets/images/bg.svg"><meta name="twitter:image" content="http://localhost:4000/assets/images/bg.svg"><body><div id="shadow"></div><header class="main-header content-wrapper"> <input type="checkbox" id="menu-checkbox" /><nav class="center-wrapper nav-main"> <a class="blog-logo" href="/">Your awesome title</a> <a href="/about/">About</a> <a href="/posts/">Archive</a> <a href="/feed.xml">RSS</a> <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label></nav></header><aside class="sidebar" role="note" style="background-image: url(http://localhost:4000/assets/images/bg.svg)"><div class="cover"><div class="cover-text"><div class="heading"> <a href="/posts/#membuat toko online">membuat toko online</a> <a href="/posts/#membuat toko online – php dan mysql part 3">membuat toko online – php dan mysql part 3</a> <a href="/posts/#toko online php dan mysql">toko online php dan mysql</a></div><p></div></div><div id="switcher"></div></aside><main class="content-wrapper"><article class="post"><h1 class="post-title">Membuat Toko Online – PHP dan MySQL Part 3</h1><p class="post-meta"> <time datetime="2012-10-12">12-10-2012</time> &nbsp;/&nbsp; <span>admin</span><div class="post-content"><p>Akhirnya sampai juga pada pembuatan toko online part ke-3 setelah menunggu dan mengelak dari beberapa aktifitas di kampus dan di jalanan heheh <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />. Baiklah pada tahap ini bukalah file index.php yang telah kita buat sebelumnya pada bagian<a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">“Membuat Toko Online – PHP dan MySQL Part 2″</a>. Selanjutnya isikan syntax dibawah ini,<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+include "include/lib.php";
+include "include/top.php";
+include "include/left.php";
+	$v = $_GET['v'];
+	if($v == 'produk') {
+		require_once "include/product.php";
+	} elseif ($v == 'cart') {
+		require_once "include/cart.php";
+	} elseif ($v == 'order') {
+		require_once "include/order.php";
+	} else {
+		require_once "include/home.php";
+	}
+include "include/bottom.php";
+?&gt;
+</pre><p>Pada syntax diatas dapat dijelaskan bahwa kita me-load file <strong><a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">lib.php</a></strong> yang berada pada folder include begitu juga file-file lainnya seperti <strong><a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">top.php, left.php dan bottom.php</a></strong>. Ya benar seperti yang telah kita ketahui pada part sebelumnya dalam pembuatan <strong><a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">toko online</a></strong> ini kita akan menggunakan teknik modulasi seperti tampak pada syntax diatas <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" />.<p>Penjelasan selanjutnya yaitu kita akan memanfaatkan fungsi kontrol IF dan ELSE IF yang memanfaatkan $v sebagai variabel yang dihasilkan menggunakan method $_GET (dapat dilihat pada syntax diatas). Pada bagian ini kita membuat beberapa kondisi pengontrolan seperti, jika variabel “$v sama dengan (==) “produk” maka ikut sertakan file product.php yang telah kita buat pada part sebelumnya. Begitu juga file-file lainnya seperti <strong><a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">cart.php, order.php dan home.php</a></strong> seperti nampak pada syntax diatas.<p>Baiklah kita masuk ke tahap selanjutnya, silahkan buka file input.php (masih kosong) yang telah dijelaskan sebelumnya pada Membuat Toko Online – PHP dan MySQL Part2 lalu isikan syntax dibawah ini,<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+session_start();
+error_reporting(0);
+include "include/lib.php";
+$input=$_GET[input];
+$sid = session_id();
+$inputform=$_GET[inputform];
+
+if($input=='add'){
+	$sql = mysql_query("SELECT id_product FROM keranjang WHERE id_product='$_GET[id]' AND id_session='$sid'");
+	$num = mysql_num_rows($sql);
+	if ($num==0){
+		mysql_query("INSERT INTO keranjang(id_product,
+											id_session,
+											tgl_keranjang,
+											qty)
+									VALUES	('$_GET[id]',
+											'$sid',
+											'$tgl_sekarang',
+											'1')") or die (mysql_error());
+	}
+	else {
+		mysql_query("UPDATE keranjang SET qty = qty + 1 WHERE id_session = '$sid' AND id_product='$_GET[id]'") or die (mysql_error());
+	}
+	deletecart();
+	header('location:index.php?v=cart');
+	}
+elseif ($input=='delete'){
+	mysql_query("DELETE FROM keranjang WHERE id_keranjang='$_GET[id]'");
+	header('location:index.php?v=cart');
+	}
+elseif ($input=='inputform'){
+	$ct_content = cart_content();
+	$jml = count($ct_content);
+	$now = date("Ymd");
+	for($i=0; $i&lt;$jml; $i++){
+	mysql_query("INSERT INTO order_product(name,
+											email,
+											phone,
+											address,
+											id_product,
+											jumlah,
+											tanggal,
+											id_pemesan)
+									VALUES ('$_POST[name]',
+											'$_POST[email]',
+											'$_POST[telp]',
+											'$_POST[address]',
+											{$ct_content[$i]['id_product']},
+											{$ct_content[$i]['qty']},
+											'$now',
+											'$sid')");
+		}
+	for($i=0; $i&lt;$jml; $i++){
+		mysql_query("DELETE FROM keranjang WHERE id_keranjang = {$ct_content[$i]['id_keranjang']}");
+		}
+		echo "&lt;script&gt;window.alert('Terima Kasih Pesanan Anda Sedang Kami Proses');
+        window.location=('index.php')&lt;/script&gt;";
+	}
+?&gt;
+</pre><p>Jika disederhanakan syntax file diatas berisi perintah input ke dalam mySQL <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" />. Tidak jauh berbeda dengan file sebelumnya, file input.php ini masih menggunakan teknik kontrol IF dan ELSEIF, ya mungkin kita akan akan lebih mudah dalam proses maintanance dan perawatan lainnya jika terdapat beberapa kesalahan atau hal yang tidak diinginkan <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />heheh lebay.<ul style="line-height: 1.6em;" type="square"><li> Pada baris pertama, kita mengaktifkan session dengan menggunakan fungsi session_start().<li> Baris kedua merupakan fungsi php yang berguna untuk mematikan menonaktifkan semua laporan pemberitahuan error.<li> Baris ke tiga dan keempat mungkin sudah kita bahas pada bagian atas yah <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><li> Baris ke 19 sampai 27 berisi syntax PHP+MySQL yang berfungsi untuk melakukan proses input ke dalam database, seperti yang nampak pada syntax (pada baris ke 25) terlihat bahwa setelah melakukan input ke dalam database kita memanggil fungsi <strong><a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">deletecart()</a> </strong>yang berguna untuk menghapus query pada tabel keranjang yang telah kita buat sebelumnya pada<strong> <a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">tahap sebelumnya.</a></strong> Setelah proses dieksekusi makan proses dilanjutkan dengan me-direct ke halaman index.php (lihat pada Baris ke 26).<li> Baris ke 28 sampai 31 berfungsi untuk menghapus query.<li> Baris 32 sampai 53 berguna untuk mengeksekusi proses input yang berisi perintah untuk memasukan query ke dalam tabel order_product, sebelumnya telah kita ketahui proses ini hanya memindahkan tabel keranjang ke dalam tabel order_product. lihat juga fungsi <a title="Membuat Toko Online – PHP dan MySQL Part 2" href="http://hitamcoklat.com/2012/10/03/membuat-toko-online-php-dan-mysql-part-2/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);"><strong>cart_content()</strong></a> pada pembahasan sebelumnya.<li> Baris ke 54 sampai 58 merupakan proses perulangan yang berisi perintah delete pada PHP+MySQL yang perulangannya telah ditentukan sebelumnya pada variabel <strong>$jml </strong>dengan menggunakan fungsi <strong>count() </strong>(lihat baris ke 34). Setelah itu jika proses berhasil maka akan muncul window alert dan me-direct halaman ke index.php seperti terlihat di baris ke 57 sampai 58.</ul><p>Baiklah mungkin sampai disini tahap pembuatan toko online dari sisi pengunjung, pada part selanjutnya akan dibahas mengenai pembuatan halaman administrator nya. Semoga bermanfaat <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" />Salam blogger!<p>Baiklah file part1, part2 dan part3 anda sudah selesai dan jika tidak ada kesalahan maka filenya akan seperti dibawah ini.<p><strong><a title="download file" href="http://hitamcoklat.com/wp-content/uploads/2012/10/part1-part2-part3.rar" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);">Klik Disini Untuk Download File</a></strong> <a class="link-to-post" href="/2012/10/31/membuat-toko-online-php-dan-mysql-part-4/"> <span class="link-to-post__next">&#10535; &nbsp;Next post</span> <span class="link-to-post__title">Membuat Toko Online – PHP dan MySQL Part 4</span> </a> <a class="link-to-post" href="/2012/10/03/10-template-website-portofolio-terbaik-gratis/"> <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span> <span class="link-to-post__title">10 Template Website Portofolio Terbaik &#8211; Gratis</span> </a></div></article><div id="disqus_thread"></div><script> /** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */ /* var disqus_config = function () { this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable }; */ (function() { // DON'T EDIT BELOW THIS LINE var d = document, s = d.createElement('script'); s.src = '//hitamcoklat.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> <script id="dsq-count-scr" src="//hitamcoklat.disqus.com/count.js" async></script></main><footer class="blog-footer content-wrapper"><p>&copy; <span class="full-year"></span> Your awesome title</footer><script src="/assets/js/scripts.js"></script>

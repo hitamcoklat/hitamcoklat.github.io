@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title> Membuat OAuth Login Facebook PHP dan MySQL</title><meta name="description" content="Bagi anda yang sering mengunjungi website, baik itu web portal atau toko online yang sering menanyakan informasi terhadap pengunjung webnya. Salah satu nya a..."><link rel="canonical" href="http://localhost:4000/2013/09/22/membuat-oauth-login-facebook-php-dan-mysql/"><link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml"><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|Roboto+Condensed:700&subset=latin' rel='stylesheet' type='text/css'><link rel="stylesheet" href="http://localhost:4000/assets/css/main.css"><meta property="og:url" content="http://localhost:4000/2013/09/22/membuat-oauth-login-facebook-php-dan-mysql/"><meta property="og:type" content="website"><meta property="og:title" content="Membuat OAuth Login Facebook PHP dan MySQL"><meta property="og:description" content=""><meta property="og:site_name" content="Your awesome title"><meta name="twitter:card" content="summary"><meta name="twitter:url" content="http://localhost:4000/2013/09/22/membuat-oauth-login-facebook-php-dan-mysql/"><meta name="twitter:title" content="Membuat OAuth Login Facebook PHP dan MySQL"><meta name="twitter:description" content=""><meta property="og:image" content="http://localhost:4000/assets/images/bg.svg"><meta name="twitter:image" content="http://localhost:4000/assets/images/bg.svg"><body><div id="shadow"></div><header class="main-header content-wrapper"> <input type="checkbox" id="menu-checkbox" /><nav class="center-wrapper nav-main"> <a class="blog-logo" href="/">Your awesome title</a> <a href="/about/">About</a> <a href="/posts/">Archive</a> <a href="/feed.xml">RSS</a> <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label></nav></header><aside class="sidebar" role="note" style="background-image: url(http://localhost:4000/assets/images/bg.svg)"><div class="cover"><div class="cover-text"><div class="heading"> <a href="/posts/#faceboko login php dan mysql">faceboko login php dan mysql</a> <a href="/posts/#facebook login">facebook login</a> <a href="/posts/#membuat facebook connect">membuat facebook connect</a> <a href="/posts/#membuat login facebook php">membuat login facebook php</a> <a href="/posts/#membuat oauth facebook php">membuat oauth facebook php</a></div><p></div></div><div id="switcher"></div></aside><main class="content-wrapper"><article class="post"><h1 class="post-title">Membuat OAuth Login Facebook PHP dan MySQL</h1><p class="post-meta"> <time datetime="2013-09-23">23-09-2013</time> &nbsp;/&nbsp; <span>admin</span><div class="post-content"><p>Bagi anda yang sering mengunjungi website, baik itu web portal atau toko online yang sering menanyakan informasi terhadap pengunjung webnya. Salah satu nya adalah untuk mengantisipisasi orang yang sedang berkunjung di website kita adalah orang. Halaaahh sampe segitunya, haha kita ambil contoh lainnya, mungkin kita pernah diminta untuk melakukan SignUp atau Login menggunakan akun facebook anda? kok bisa ya kita login dengan menggunakan akun Facebook kita? untuk penjelasannya coba deh googling dengan keyword “apa itu OAuth?” <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><p>Baiklah jika kita sudah mengetahui jawaban mengenai OAuth itu sendiri kita akan membuat skrip login sederhana menggunakan Facebook Login. Mengapa kita menggunakan Facebook Login? mungkin jaman sekarang siapa yang tidak memiliki akun Facebook? walaupun akun tersebut jarang sekali dibuka hehe… ya dengan adanya Facebook Login ini kita dapat mempersingkat waktu pengunjung website kita dalam proses login itu sendiri karena kita diberi akses untuk mengetahui data publik pengunjung kita tanpa harus mengetiknya, bagaimana? masih bingung? hehe<p>Jadi intinya dengan menggunakan fasilitas Facebook login ini, anda diberi kemudahan dalam proses login dalam suatu website karena memanfaatkan informasi dari Facebook anda <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /><p>Oke langsung aja pada penerapannya <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><h2 id="langkah-1--database">Langkah 1 : Database</h2><pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `users` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `oauth_provider` varchar(10),
+    `oauth_uid` text,
+    `username` text,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+</pre><p>Dalam table tersebut terdapat id, oauth_provider, oauth_uid dan username yang nantinya akan menyimpan data-data facebook user setelah melakukan login..<h2 id="langkah-2--membuat-aplikasi-di-facebook">Langkah 2 : Membuat Aplikasi di Facebook</h2><p>Untuk dapat mendaftarkan aplikasi anda di facebook caranya mudah sekali, silahkan klik http://developers.facebook.com setelah itu nanti kamu bakalan disuruh untuk mengisi beberapa field seperti tampak pada gambar dibawah ini..<p><img class="alignnone size-full wp-image-947" title="facebook_apps" src="http://hitamcoklat.com/wp-content/uploads/2013/09/facebook_apps.png" alt="" width="799" height="588" /><p>Keterangan :<ol><li>Pada label nomer satu yaitu AppId dan AppSecret yang nantinya kamu gunakan untuk menggunakan Facebook PHP SDK yang nantinya kita akan gunakan <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><li>Pada label nomer dua berisi field yang digunakan ketika script login kita dijalankan atau di redirect <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /></ol><p>Oke selanjutnya kita akan mendownload ramuan intinya, disini kita akan menggunakan Facebook PHP SDK, maka silahkan klik link dibawah ini<p><a href="https://github.com/facebook/facebook-php-sdk" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">https://github.com/facebook/facebook-php-sdk</a><p>Jika anda sudah mendownloadnya, seharusnya terdapat beberapa file.. sekarang kita fokus saja pada file yang berada di dalam folder <strong>/src</strong><p>didalam folder <strong>/src</strong> tadi seharusnya berisi dua buah file yaitu:<ol><li>base_facebook.php<li>facebook.php</ol><h2 id="langkah-3--penerapan-skrip">Langkah 3 : Penerapan Skrip</h2><p>Baiklah langkah terakhir yaitu penerapan Facebook PHP SDK tersebut pada aplikasi website yang kita buat. Disini anggap saja kita memiliki dua buah file atau dua buah halaman…<ol><li>Halaman pertama berfungsi sebagai halaman awal dari aplikasi kita, jadi di halaman ini terdapat link yang ditujukan pada pengguna untuk memulai login menggunakan Facebook Login<li>Halaman kedua berfungsi untuk memproses ketika user melakukan login facebook dan memasukan data user tersebut kedalam table yang telah kita buat sebelumnya <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /></ol><div> NOTE: sebelumnya perlu diketahui bahwa pada postingan ini sistem folder adalah sebagai berikut:</div><div><ul><li> ROOT<ul><li> Folder <strong>src</strong><ul><li> File <strong>facebook.php</strong><li> File <strong>base_facebook.php</strong></ul><li> Folder <strong>Login</strong><ul><li> File <strong>index.php</strong><li> File <strong>proses.php</strong></ul></ul></ul></div><p>Oke langsung saja ya, pertama kita buat dulu file yang bernama index.php<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+&lt;?php
+
+session_start();
+?&gt;
+&lt;h2&gt;Welcome,
+&lt;?php
+	if(!empty($_SESSION) {
+		echo $_SESSION['username'];
+	} else {
+		echo 'Guest | &lt;a href="proses.php"&gt;Login?&lt;/a&gt;';
+?&gt;&lt;/h2&gt;
+</pre><p>File tersebut jika dijalankan memiliki dua kondisi, yaitu ketika pengguna belum mendaftar maka akan memunculkan link untuk login dengan menggunakan Facebook Login tetapi jika pengguna telah melakukan login dan datanya sudah ada dalam table kita maka akan memunculkan username Facebook pengguna <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><p>Selanjutnya kita buat file proses.php yang isinya sebagai berikut..<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+session_start();
+require '../src/facebook.php';
+
+$facebook = new Facebook(array(
+  'appId'  =&gt; 'nama_app_id_anda',
+  'secret' =&gt; 'nama_app_secret_anda',
+));
+
+// Get User ID
+$user = $facebook-&gt;getUser();
+
+if (!empty($user)) {
+  try {
+
+    $user_profile = $facebook-&gt;api('/me');
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+
+  if(!empty($user_profile)) {
+
+		mysql_connect('localhost', 'root', '');
+		mysql_select_db('nama_database');
+
+		//Mengecek apakah user sudah mendaftar atau belum
+		$query = mysql_query("SELECT * FROM users WHERE oauth_provider = 'facebook' AND oauth_uid = ".$user_profile['id']);
+		$result = mysql_fetch_array($query);
+
+		if($result == null) {
+
+			//Memasukan data user
+			$query = mysql_query("INSERT INTO users(oauth_provider, oauth_uid, username) VALUES('facebook', {$user_profile['id']}, '{$user_profile['username']}')");
+			$query = mysql_query("SELECT * FROM users WHERE id = ".mysql_insert_id());
+			$result = mysql_fetch_array($query);
+		}
+		// Mengeset SESSION
+		$_SESSION['id'] = $result['id'];
+		$_SESSION['oauth_uid'] = $result['oauth_uid'];
+		$_SESSION['oauth_provider'] = $result['oauth_provider'];
+		$_SESSION['username'] = $result['username'];
+
+	}
+	  else {
+		die("Terjadi Kesalahan");
+		}
+}
+else {
+
+	$login_url = $facebook-&gt;getLoginUrl();
+	header("Location: ".$login_url);
+}
+?&gt;
+
+</pre><p>File proses.php tersebut berfungsi untuk mengecek apakah user telah terdaftar dalam table atau website kita? jika sudah terdaftar maka akan diset session dan dikembalikan ke halaman index.php tetapi jika belum maka akan dilakukan proses redirect ke halaman login facebook dengan memanfaatkan sintaks $facebook-&gt;getLoginUrl(); pada bagian akhir baris…<h2 id="langkah-4--pengetesan">Langkah 4 : Pengetesan</h2><p>Untuk langkah pengetesan ini, silahkan anda masukan url yang merujuk pada <strong>index.php</strong> tadi, dan jika sudah seharusnya anda diharuskan login karena session anda belum dibuat. Untuk dapat dibuatkan session maka anda disuruh untuk mengklik login dan ketika anda klik login anda merujuk pada halaman login facebook. Setelah anda berhasil login maka anda dikembalikan pada halaman <strong>proses.php</strong> tadi yang berfungsi untuk mengambil data publik facebook anda dan memasukannya kedalam tabel database yang telah kita buat tadi. Setelah data kita berada di dalam tabel database tersebut maka secara otomatis user tersebut dibuat kan session… <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><p>Oke dengan dua buah file tadi yang telah kita buat dan ditambah Facebook SDK untuk Login telah selesai… Sekarang silahkan mencobanya. Dengan adanya fasilitas login seperti ini maka diharapkan proses login akan lebih mudah dan menyenangkan <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />heheh<p>Sekian postingan kali ini <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" />Salam Blogger! <a class="link-to-post" href="/2013/11/24/mengenai-responsive-web/"> <span class="link-to-post__next">&#10535; &nbsp;Next post</span> <span class="link-to-post__title">Membuat Responsive Web Part 1 &#8211; Hello World</span> </a> <a class="link-to-post" href="/2013/09/10/upload-drag-and-drop-file-menggunakan-dropzone-js/"> <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span> <span class="link-to-post__title">Upload Drag and Drop File Menggunakan dropzone.js</span> </a></div></article><div id="disqus_thread"></div><script> /** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */ /* var disqus_config = function () { this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable }; */ (function() { // DON'T EDIT BELOW THIS LINE var d = document, s = d.createElement('script'); s.src = '//hitamcoklat.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> <script id="dsq-count-scr" src="//hitamcoklat.disqus.com/count.js" async></script></main><footer class="blog-footer content-wrapper"><p>&copy; <span class="full-year"></span> Your awesome title</footer><script src="/assets/js/scripts.js"></script>
