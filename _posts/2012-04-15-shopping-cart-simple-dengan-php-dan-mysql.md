@@ -28,15 +28,24 @@ Pada langkah pertama ini buatlah database yang terdiri dari 5 table,
 
 Yang pertama adalah table Kategori,
 
+<<<<<<< HEAD
 <pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `category` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `category` varchar(100) NOT NULL,
             PRIMARY KEY (`id`)
           ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1
+=======
+<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `category` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `category` varchar(100) NOT NULL,
+            PRIMARY KEY (`id`)
+          ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
 </pre>
 
 Selanjutnya Buatlah table order_product, yang berfungsi untuk menyimpan data pesanan nanti seperti dibawah ini.
 
+<<<<<<< HEAD
 <pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `order_product` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `id_product` int(11) NOT NULL,
@@ -50,10 +59,26 @@ Selanjutnya Buatlah table order_product, yang berfungsi untuk menyimpan data pes
  `tanggal` date NOT NULL,
  PRIMARY KEY (`id`)
  ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1
+=======
+<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `order_product` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `id_product` int(11) NOT NULL,
+ `id_pemesan` varchar(100) NOT NULL,
+ `name` varchar(100) NOT NULL,
+ `email` varchar(100) NOT NULL,
+ `address` varchar(1000) NOT NULL,
+ `phone` bigint(20) NOT NULL,
+ `status` varchar(30) NOT NULL DEFAULT 'New',
+ `jumlah` int(4) NOT NULL,
+ `tanggal` date NOT NULL,
+ PRIMARY KEY (`id`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
 </pre>
 
 Berikutnya table product yang berfungsi untuk menyimpan data produk. Sintaksnya dapat dilihat seperti dibawah ini.
 
+<<<<<<< HEAD
 <pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `product` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `product_name` varchar(100) NOT NULL,
@@ -63,10 +88,22 @@ Berikutnya table product yang berfungsi untuk menyimpan data produk. Sintaksnya 
  `deskripsi` text NOT NULL,
  PRIMARY KEY (`id`)
  ) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1
+=======
+<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `product` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `product_name` varchar(100) NOT NULL,
+ `price` bigint(20) NOT NULL,
+ `image` varchar(1000) NOT NULL,
+ `id_category` int(11) NOT NULL,
+ `deskripsi` text NOT NULL,
+ PRIMARY KEY (`id`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
 </pre>
 
 Lanjut ke table user untuk halaman login-nya&#8230;
 
+<<<<<<< HEAD
 <pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `user` (
  `id_user` varchar(50) COLLATE latin1_general_ci NOT NULL,
  `password` varchar(50) COLLATE latin1_general_ci NOT NULL,
@@ -75,10 +112,21 @@ Lanjut ke table user untuk halaman login-nya&#8230;
  PRIMARY KEY (`id_user`)
  ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci
 
+=======
+<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `user` (
+ `id_user` varchar(50) COLLATE latin1_general_ci NOT NULL,
+ `password` varchar(50) COLLATE latin1_general_ci NOT NULL,
+ `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
+ `level` varchar(50) COLLATE latin1_general_ci NOT NULL DEFAULT 'user',
+ PRIMARY KEY (`id_user`)
+ ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci
+
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
 </pre>
 
 Langkah terakhir adalah table keranjang yang berfungsi untuk mengambil data sementara untuk penggunaan cart dalam penggunaan keranjang pada sistem shopping cart ini.
 
+<<<<<<< HEAD
 <pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `keranjang` (
  `id_keranjang` int(5) NOT NULL AUTO_INCREMENT,
  `id_product` int(5) NOT NULL,
@@ -88,6 +136,17 @@ Langkah terakhir adalah table keranjang yang berfungsi untuk mengambil data seme
  PRIMARY KEY (`id_keranjang`)
  ) ENGINE=MyISAM AUTO_INCREMENT=360 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci
 
+=======
+<pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `keranjang` (
+ `id_keranjang` int(5) NOT NULL AUTO_INCREMENT,
+ `id_product` int(5) NOT NULL,
+ `id_session` varchar(100) COLLATE latin1_general_ci NOT NULL,
+ `tgl_keranjang` date NOT NULL,
+ `qty` int(4) NOT NULL,
+ PRIMARY KEY (`id_keranjang`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=360 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci
+
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
 </pre>
 
 ## Langkah Berikutnya,
@@ -117,8 +176,13 @@ Tapi jika kamu penasaran bisa langsung di download aja file-nya
 <div id='wpdm_file_3' class='wpdm_file wpdm-only-button'>
   <div class='cont'>
     <div class='btn_outer'>
+<<<<<<< HEAD
       <div class='btn_outer_c'>
         <a class='btn_left' rel='3' title='Shopping Cart Simple' href="http://hitamcoklat.com/wp-content/uploads/download-manager-files/shopping_cart.rar"><< Download</a><span class='btn_right'>&nbsp;</span>
+=======
+      <div class='btn_outer_c' style='background-image: url(http://localhost/hitamcoklat/wp-content/plugins/download-manager/icon/Download_Crate.png);'>
+        <a class='btn_left  ' rel='3' title='Shopping Cart Simple' href="http://localhost/hitamcoklat/?wpdmact=process&did=My5ob3RsaW5r"   >Download</a><span class='btn_right'>&nbsp;</span>
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
       </div>
     </div>
     
@@ -127,4 +191,8 @@ Tapi jika kamu penasaran bisa langsung di download aja file-nya
   </div>
 </div>
 
+<<<<<<< HEAD
 Semoga bisa membantu  :)
+=======
+Semoga bisa membantu  <img src='http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' />
+>>>>>>> e9f0b44fcb065adf8f120ab0638d33dbda8ac0ca
