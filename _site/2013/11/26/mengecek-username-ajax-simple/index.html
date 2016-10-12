@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title> Mengecek Username Ajax &amp;#8211; Simple</title><meta name="description" content="Mungkin sudah gak asing lagi ya tentang sistem mengecek ketersediaan data disebuah database hehe..tapi ga apa2 lah pengen berbagi sedikit mengenai sistem ini..."><link rel="canonical" href="http://blog.hitamcoklat.com/2013/11/26/mengecek-username-ajax-simple/"><link rel="alternate" type="application/rss+xml" title="Blog Hitamcoklat" href="http://blog.hitamcoklat.com/feed.xml"><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|Roboto+Condensed:700&subset=latin' rel='stylesheet' type='text/css'><link rel="stylesheet" href="http://blog.hitamcoklat.com/assets/css/main.css"><meta property="og:url" content="http://blog.hitamcoklat.com/2013/11/26/mengecek-username-ajax-simple/"><meta property="og:type" content="website"><meta property="og:title" content="Mengecek Username Ajax &#8211; Simple"><meta property="og:description" content=""><meta property="og:site_name" content="Blog Hitamcoklat"><meta name="twitter:card" content="summary"><meta name="twitter:url" content="http://blog.hitamcoklat.com/2013/11/26/mengecek-username-ajax-simple/"><meta name="twitter:title" content="Mengecek Username Ajax &#8211; Simple"><meta name="twitter:description" content=""><meta property="og:image" content="http://blog.hitamcoklat.com/assets/images/bg.svg"><meta name="twitter:image" content="http://blog.hitamcoklat.com/assets/images/bg.svg"><body><div id="shadow"></div><header class="main-header content-wrapper"> <input type="checkbox" id="menu-checkbox" /><nav class="center-wrapper nav-main"> <a class="blog-logo" href="/">Blog Hitamcoklat</a> <a href="/posts/">Archive</a> <a href="/feed.xml">RSS</a> <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label></nav></header><aside class="sidebar" role="note" style="background-image: url(http://blog.hitamcoklat.com/assets/images/bg.svg)"><div class="cover"><div class="cover-text"><div class="heading"> <a href="/posts/#cek username">cek username</a> <a href="/posts/#mengecek username ajax">mengecek username ajax</a> <a href="/posts/#username ajax">username ajax</a></div><p></div></div><div id="switcher"></div></aside><main class="content-wrapper"><article class="post"><h1 class="post-title">Mengecek Username Ajax &#8211; Simple</h1><p class="post-meta"> <time datetime="2013-11-26">26-11-2013</time> &nbsp;/&nbsp; <span>admin</span><div class="post-content"><p>Mungkin sudah gak asing lagi ya tentang sistem mengecek ketersediaan data disebuah database hehe..tapi ga apa2 lah pengen berbagi sedikit mengenai sistem ini, kebetulan kemarin ada sedikit pekerjaan yang mengharuskan menggunakan sistem ini dan alhamdulillah sekarang dapat memposting pada blog ini.<p>Sebetulnya ada banyak sekali library jquery yang mungkin lebih canggih lagi dari sistem yang akan kita buat sekarang, tapi pada dasarnya sama saja dalam penggunaannya, yakni ketika kita mengecek suatu data maka data tersebut di proses dengan memanfaatkan ajax <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" />. Baiklah langsung aja ya.. Semoga bermanfaat <img src="http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" /><h2 id="database">Database</h2><pre class="brush: php; title: ; notranslate" title="">CREATE TABLE `users` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `username` varchar(32) NOT NULL,
+          `password` varchar(32) NOT NULL,
+          PRIMARY KEY (`id`)
+        );
+</pre><p>selanjutnya isi tabel nya<pre class="brush: php; title: ; notranslate" title="">INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'budi', 'budi'),
+(2, 'rudi', 'rudi'),
+(3, 'tian', 'tian')
+</pre><h2 id="langkah-pertama">Langkah Pertama</h2><p>Buatlah sebuah file index.html yang berisi dua input text login dan password. Setelah itu buatlah tag anchor yang nantinya digunakan untuk mengecek username yang akan kita ketik. Jika sudah maka tampilan ketersediaan username akan ditampilkan pada tag span yang ada pada HTMLnya. Berikut adalah sintaks HTML nya<pre class="brush: xml; title: ; notranslate" title="">&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Mengecek Username&lt;/title&gt;
+		&lt;style&gt;
+			body {
+				font-family: Arial;
+			}
+			input, textarea {
+				vertical-align: top;
+			}
+			fieldset {
+				width: 400px;
+			}
+			label {
+				float: left;
+				width: 150px;
+			}
+			#error {
+				font-weight: bold;
+				color: #ff0000;
+			}
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;fieldset&gt;
+			&lt;legend&gt;&lt;strong&gt;Tambahkan Username dan Password&lt;/strong&gt;&lt;/legend&gt;
+			&lt;form action="" method="POST" id="loginForm"&gt;
+				&lt;p&gt;
+					&lt;label&gt;Username&lt;/label&gt;
+					&lt;input type="text" name="loginName" id="loginName" /&gt;
+					&lt;a href="#" id="check"&gt;Check&lt;/a&gt;
+					&lt;span id="status" style="float: right;"&gt;&lt;/span&gt;
+				&lt;/p&gt;
+				&lt;p&gt;
+					&lt;label&gt;Password&lt;/label&gt;
+					&lt;input type="password" name="password" /&gt;
+				&lt;/p&gt;
+				&lt;p&gt;
+					&lt;span id="error"&gt;&lt;/span&gt;
+				&lt;/p&gt;
+				&lt;p&gt;
+					&lt;input type="submit" value="Save" name="save" id="save" /&gt;
+				&lt;/p&gt;
+			&lt;/form&gt;
+		&lt;/fieldset&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</pre><p>Jika kita jalankan sintaks diatas maka akan tampil seperti gambar dibawah ini<p><a href="http://hitamcoklat.com/wp-content/uploads/2013/11/cek_user1.png" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[983]" title="cek_user1"><img class="alignnone size-full wp-image-984" title="cek_user1" src="http://hitamcoklat.com/wp-content/uploads/2013/11/cek_user1.png" alt="cek_user1" width="454" height="197" /></a><h2 id="langkah-kedua">Langkah Kedua</h2><p>Langkah selanjutnya adalah menambahkan beberapa fungsi jquery kedalam head pada file HTML diatas dengan ditambahkan sintaks berikut ini..<pre class="brush: jscript; title: ; notranslate" title="">&lt;script src="jquery.js"&gt;&lt;/script&gt;
+		&lt;script&gt;
+			$(document).ready(function (){
+
+				var checked = false;
+
+				$('#check').click(function (){
+
+					$('#error').empty();
+					var inputValue = $('#loginName').val();
+
+					if (jQuery.trim(inputValue) == ''){
+						return false;
+					}
+					$.post(
+						'proses.php',
+						{ username : inputValue },
+						function (data)
+						{
+							if (data)
+							{
+								checked = true;
+								$('#status').html('Username Tersedia');
+							}
+							else
+							{
+								checked = false;
+								$('#status').html('Username sudah dipakai');
+								return false;
+							}
+						}
+					);
+				});
+				$('#loginForm').submit(function (){
+
+					if (checked == false)
+					{
+						$('#error').html('Silahkan Cek Username');
+						return false;
+					}
+					else
+					{
+						return false;
+					}
+				});
+				$('#loginName').focus(function (){
+					checked == false;
+				});
+			});
+		&lt;/script&gt;
+</pre><p>Dapat dilihat bahwa sintaks diatas mengandung beberapa event jQuery yang berfungsi ketika kita mengklik check pada elemen ID check akan mengirim data berupa ajax request kepada file proses.php yang akan kita buat selanjutnya yang mengembalikan nilai true atau false tergantung kepada username yang kita cek. Oke supaya lebih jelas kita lanjutkan dulu ke langkah selanjutnya yaitu pembuatan file proses.php.. Oke cekidot<h2 id="langkah-ketiga">Langkah Ketiga</h2><p>Langkah selanjutnya yaitu membuat file proses.php yang mana akan berhubungan dengan database nanti, langsung aja ke sintaksnya ya..<pre class="brush: php; title: ; notranslate" title="">&lt;?php
+mysql_connect("localhost","root","") or die("Koneksi gagal");
+mysql_select_db("") or die("Database tidak bisa dibuka");
+
+	$sql = mysql_query("SELECT username as user FROM users WHERE username = '".$_POST['username']."' LIMIT 1");
+
+	$hitung = mysql_num_rows($sql);
+
+	if ($sql)
+	{
+		if ($hitung &gt; 0)
+		{
+			echo false;
+		}
+		else
+		{
+			echo true;
+		}
+	}
+	else
+	{
+		echo false;
+	}
+?&gt;
+</pre><p>Jika sudah maka silahkan jalankan file index.html tadi yang telah kita buat diawal. Setelah itu ketika username didalam input text nya. Ketika kamu mengklik pada pada anchor Check anda akan menerima pesan seperti dibawah ini. Ketika kamu mengetikan username yang sudah tersedia didalam table database maka akan tampil seperti gambar dibawah ini..<p><a href="http://hitamcoklat.com/wp-content/uploads/2013/11/cek_user2.png" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);" rel="lightbox[983]" title="cek_user2"><img class="alignnone size-full wp-image-987" title="cek_user2" src="http://hitamcoklat.com/wp-content/uploads/2013/11/cek_user2.png" alt="cek_user2" width="441" height="183" /></a> <a class="link-to-post" href="/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/"> <span class="link-to-post__next">&#10535; &nbsp;Next post</span> <span class="link-to-post__title">Membuat CMS Blog PHP dan MySQL Part-1</span> </a> <a class="link-to-post" href="/2013/11/24/mengenai-responsive-web/"> <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span> <span class="link-to-post__title">Membuat Responsive Web Part 1 &#8211; Hello World</span> </a></div></article><div id="disqus_thread"></div><script> (function() { var d = document, s = d.createElement('script'); s.src = '//hitamcoklat.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> <script id="dsq-count-scr" src="//hitamcoklat.disqus.com/count.js" async></script></main><footer class="blog-footer content-wrapper"><p>&copy; <span class="full-year"></span> Blog Hitamcoklat</footer><script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount','UA-23116191-6']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script> <script src="/assets/js/scripts.js"></script>

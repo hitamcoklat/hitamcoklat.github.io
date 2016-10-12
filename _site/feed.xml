@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog Hitamcoklat</title>
+    <description>Blogging, Internet, Tips and Trick, and some useful information
+</description>
+    <link>http://blog.hitamcoklat.com/</link>
+    <atom:link href="http://blog.hitamcoklat.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 12 Oct 2016 15:13:44 +0700</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 15:13:44 +0700</lastBuildDate>
+    <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>API Programming Studi Kasus Twitter Search Part 1</title>
+        <description>&lt;p&gt;Mau share dikit tentang API Programming. Apa itu API Programming? ya, untuk lebih jelasnya silahkan googling2 dahulu, soalnya udah banyak blog yang bikin artikel tentang API Programming hehhe. Atau menurut wikipedia silahkan cek link berikut:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://id.wikipedia.org/wiki/Antarmuka_pemrograman_aplikasi&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://id.wikipedia.org']);&quot;&gt;https://id.wikipedia.org/wiki/Antarmuka_pemrograman_aplikasi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gimana sudah paham?   &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;sekarang langsung aja ke studi kasus-nya ya, dalam postingan kali ini saya akan coba buat aplikasi simple dengan memanfaatkan API-nya dari Twitter. Kisi-kisi aplikasi yang akan kita buat adalah aplikasi untuk melakukan search tweet setiap orang.&lt;/p&gt;
+
+&lt;p&gt;Untuk lebih jelasnya, silahkan simak trailer dari aplikasi yang akan dibuat dibawah ini  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif&quot; alt=&quot;:D&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Oke, API yang akan kita buat akan mengambil &lt;strong&gt;name, username, profile_image, tweet, location, followers_count, friends_count, timezone&lt;/strong&gt;, Gimana? asik ya dengan memanfaatkan sebuah API dari pihak ketiga katakanlah disini &lt;strong&gt;Twitter&lt;/strong&gt; kita dapat mengemas kembali aplikasi yang memanfaatkan API yang sudah tersedia (Twitter) dengan ini kita bebas menamakannya aplikasi apapun. Oke, langsung aja ke praktik nya ya&lt;/p&gt;
+
+&lt;p&gt;Dalam memanfaatkan API ini, kita membutuhkan sebuah library perantara untuk melakukan autentikasi pada API si Twitter, sebenernya kita bisa membuatnya sendiri dari awal library ini. Namun, seperti yang kita ketahui bahwa ada banyak sekali developer yang membagikan library2 yang telah mereka buat *dan library nya juga keren2  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;. Seperti salah satunya library Twitter Oauth yang satu ini yang menurut saya cukup lengkap. Silahkan anda download terlebih dahulu&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/abraham/twitteroauth&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);&quot;&gt;https://github.com/abraham/twitteroauth&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Selanjutnya langkah pembuatan aplikasi dari sisi twitter nya&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;silahkan kunjungi link berikut ini &lt;a href=&quot;https://apps.twitter.com/&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://apps.twitter.com']);&quot;&gt;https://apps.twitter.com&lt;/a&gt; setelah itu silahkan login menggunakan akun twitter anda, Jika sudah maka akan muncul tampilan seperti dibawah ini&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/1.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1298]&quot; title=&quot;1&quot;&gt;&lt;img src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/1.png&quot; alt=&quot;&quot; title=&quot;1&quot; class=&quot;alignnone size-full wp-image-1305&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Setelah itu silahkan isi form dibagian &lt;strong&gt;Create an application&lt;/strong&gt; lalu klik dibagian Create your &lt;stong&gt;Twitter Application&amp;lt;/strong&amp;gt;, cek gambar dibawah ini&lt;/stong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/2.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1298]&quot; title=&quot;2&quot;&gt;&lt;img src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/2-828x1024.png&quot; alt=&quot;&quot; title=&quot;2&quot; class=&quot;alignnone size-large wp-image-1306&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/3.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1298]&quot; title=&quot;3 class=&quot;&gt;&lt;img src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/3.png&quot; alt=&quot;&quot; title=&quot;3 class=&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Pilih &lt;strong&gt;Keys and Access Token&lt;/strong&gt; Untuk melihat Consumer Keys yang nanti akan kita gunakan dalam membuat aplikasi&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/4.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1298]&quot; title=&quot;4&quot;&gt;&lt;img src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/07/4.png&quot; alt=&quot;&quot; title=&quot;4&quot; class=&quot;alignnone size-full wp-image-1308&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Setelah itu, anda akan lihat ada beberapa kode dari API Twitter yang telah anda buat, seperti&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Consumer Key&lt;/li&gt;
+  &lt;li&gt;Consumer Secret&lt;/li&gt;
+  &lt;li&gt;Access Token&lt;/li&gt;
+  &lt;li&gt;Access Token Secret&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Silahkan salin masing-masing value yang ada di bagian API Twitter anda, lalu paste ke file &lt;strong&gt;config.php&lt;/strong&gt; didalam folder &lt;strong&gt;config/config.php&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;&amp;lt;?php
+	
+	$config = array(
+
+				&quot;CONSUMER_KEY&quot; 			=&amp;gt; &quot;YOUR-TWITTER-CONSUMER-KEY&quot;, //CONSUMER KEY
+				&quot;CONSUMER_SECRET&quot; 		=&amp;gt; &quot;YOUR-TWITTER-CONSUMER-SECRET&quot;, // CONSUMER SECRET
+				&quot;ACCESS_TOKEN&quot; 			=&amp;gt; &quot;YOUR-TWITTER-ACCESS-TOKEN&quot;, // ACCESS TOKEN
+				&quot;ACCESS_TOKEN_SECRET&quot; 	=&amp;gt; &quot;YOUR-TWITTER-ACCESS-TOKEN-SECRET&quot; // ACCESS TOKEN SECRET
+			 
+			 );
+&lt;/pre&gt;
+
+&lt;p&gt;Gimana? sampai sini mengalami kesulitan? Silahkan komentar di bagian bawah, jika tidak mengalami kesulitan silahkan lanjut ke Bagian 2 nya  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Jul 2016 00:01:27 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2016/07/28/api-programming-studi-kasus-twitter-search-part-1/</guid>
+        
+        <category>api programming</category>
+        
+        <category>php</category>
+        
+        <category>twitter api</category>
+        
+        
+        <category>php</category>
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>API Programming Studi Kasus Twitter Search Part 2</title>
+        <description>&lt;p&gt;Jika di part 1, telah dijelaskan mengenai pembuatan dari API Twitter dari sisi Twitter nya. Selanjutnya, di bagian ini kita akan membuat tampilan disisi kita atau dengan kata lain kita akan membuat &lt;strong&gt;view&lt;/strong&gt; dari API Twitter yang akan dihasilkan (JSON yang dihasilkan).&lt;/p&gt;
+
+&lt;p&gt;Silahkan buat file index.php&lt;/p&gt;
+
+&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&quot;en&quot;&amp;gt;
+
+&amp;lt;head&amp;gt;
+
+    &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+    &amp;lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&amp;gt;
+    &amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&amp;gt;
+    &amp;lt;meta name=&quot;description&quot; content=&quot;&quot;&amp;gt;
+    &amp;lt;meta name=&quot;author&quot; content=&quot;Septian Dwi Anugrah&quot;&amp;gt;
+
+    &amp;lt;title&amp;gt;Search Twitter API&amp;lt;/title&amp;gt;
+
+    &amp;lt;!-- Bootstrap Core CSS --&amp;gt;
+    &amp;lt;link href=&quot;assets/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&amp;gt;
+    &amp;lt;link href=&quot;assets/css/styles.css&quot; rel=&quot;stylesheet&quot;&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;div class=&quot;row&quot;&amp;gt;
+      &amp;lt;div class=&quot;navbar navbar-default&quot;&amp;gt;
+        &amp;lt;div class=&quot;container&quot;&amp;gt;
+
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;container&quot;&amp;gt;
+        &amp;lt;div class=&quot;row&quot;&amp;gt;
+          &amp;lt;div class=&quot;col-md-12&quot;&amp;gt;
+            &amp;lt;img src=&quot;assets/img/logo.png&quot; class=&quot;pull-left&quot; id=&quot;heading&quot; /&amp;gt;
+            &amp;lt;div class=&quot;row&quot;&amp;gt;
+              &amp;lt;div id=&quot;search&quot; class=&quot;col-md-12&quot;&amp;gt;
+                  &amp;lt;div class=&quot;form-group col-md-12&quot;&amp;gt;
+                    &amp;lt;div class=&quot;col-md-8&quot;&amp;gt;
+                      &amp;lt;input id=&quot;searchKeyWord&quot; placeholder=&quot;Enter Keyword or #Hashtag&quot; type=&quot;text&quot;&amp;gt;
+                    &amp;lt;/div&amp;gt;
+                    &amp;lt;div class=&quot;col-md-2&quot;&amp;gt;
+                      &amp;lt;select id=&quot;count&quot; class=&quot;col-xs-12 col-md-12 text-center&quot; name=&quot;count&quot;&amp;gt;
+                        &amp;lt;option value=&quot;10&quot;&amp;gt;10&amp;lt;/option&amp;gt;
+                        &amp;lt;option value=&quot;100&quot;&amp;gt;100&amp;lt;/option&amp;gt;
+                        &amp;lt;option value=&quot;200&quot;&amp;gt;200&amp;lt;/option&amp;gt;
+                      &amp;lt;/select&amp;gt;
+                    &amp;lt;/div&amp;gt;
+                    &amp;lt;div class=&quot;col-md-2&quot;&amp;gt;
+                      &amp;lt;button type=&quot;submit&quot; id=&quot;btnSearch&quot; class=&quot;btn btn-primary pull-right col-md-10 col-lg-10 col-xs-12 text-center&quot;&amp;gt;Search&amp;lt;/button&amp;gt;
+                    &amp;lt;/div&amp;gt;
+                  &amp;lt;/div&amp;gt;
+                  &amp;lt;span class=&quot;text-center col-xs-12 col-lg-12 col-md-12&quot; id=&quot;loading&quot;&amp;gt;
+                    
+                  &amp;lt;/span&amp;gt;
+              &amp;lt;/div&amp;gt;
+            &amp;lt;/div&amp;gt;
+            &amp;lt;br&amp;gt;
+            &amp;lt;br&amp;gt;
+          &amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+    
+&amp;lt;div class=&quot;section&quot;&amp;gt;
+    &amp;lt;div class=&quot;container&quot;&amp;gt;
+      &amp;lt;div style=&quot;overflow: auto;&quot; class=&quot;row col-xs-12&quot;&amp;gt;
+      
+      &amp;lt;div class=&quot;clearfix&quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;table id=&quot;theData&quot; class=&quot;tg&quot;&amp;gt;
+        &amp;lt;thead&amp;gt;
+
+        &amp;lt;/thead&amp;gt;
+        &amp;lt;tbody id=&quot;showTable&quot;&amp;gt;
+        &amp;lt;!-- show table result --&amp;gt;
+        &amp;lt;/tbody&amp;gt;
+      &amp;lt;/table&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+
+  &amp;lt;script src=&quot;assets/js/jquery.js&quot; type=&quot;text/javascript&quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;script src=&quot;assets/js/autolink-min.js&quot; type=&quot;text/javascript&quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+    
+  $(document).ready(function(){
+
+    $('#btnSearch').click(function(){
+
+        $('#export').hide();
+        $('#loading').empty();
+        $('#loading').append('Loading...');
+        $('#showTable tr').remove();
+
+        var data = {
+            keyword: $('#searchKeyWord').val(),
+            count: $('#count').val()
+        }      
+
+        $.post(&quot;api/index.php&quot;, data, function(data, status) {
+
+            if(status == 'success' &amp;amp;&amp;amp; data.statuses.length &amp;gt; 0){
+
+                $('#export').show();
+                $('#loading').empty();
+                $('#showTable').append('&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;Name&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Username&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Profile Image&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Tweet&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Location&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Followers Count&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Friends Count&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;Time Zone&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;');
+               
+                $.each( data.statuses, function(i, item){
+                  $('#showTable').append('&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;'+item.user.name+'&amp;lt;/td&amp;gt;'+'&amp;lt;td&amp;gt;&amp;lt;a href=&quot;https://twitter.com/'+item.user.screen_name+'&quot;&amp;gt;'+item.user.screen_name+'&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;'+'&amp;lt;td class=&quot;text-center&quot;&amp;gt;&amp;lt;img src=&quot;'+item.user.profile_image_url+'&quot; /&amp;gt;&amp;lt;/td&amp;gt;'+'&amp;lt;td&amp;gt;'+item.text.autoLink({target: &quot;_blank&quot;})+'&amp;lt;/td&amp;gt;'+'&amp;lt;td&amp;gt;'+item.user.location+'&amp;lt;/td&amp;gt;&amp;lt;td class=&quot;text-center&quot;&amp;gt;'+item.user.followers_count+'&amp;lt;/td&amp;gt;&amp;lt;td class=&quot;text-center&quot;&amp;gt;'+item.user.friends_count+'&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;'+item.user.time_zone+'&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;').hide().fadeIn();
+                });
+
+            } 
+
+            else if(status == 'success' &amp;amp;&amp;amp; data.statuses.length &amp;lt;= 0) {
+
+              $('#loading').empty();
+              $('#loading').append('Not Available!');
+
+            }
+
+            else {
+
+                console.log('ERROR!');
+                alert('ERROR!');
+            
+            }
+
+        });
+
+    });    
+
+  });
+
+  &amp;lt;/script&amp;gt;
+
+  &amp;lt;/body&amp;gt;
+
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;
+
+&lt;h2 id=&quot;penjelasan-file-indexphp&quot;&gt;Penjelasan file index.php&lt;/h2&gt;
+
+&lt;p&gt;Pada baris berikut&lt;/p&gt;
+
+&lt;pre&gt;$.post(&quot;api/index.php&quot;, data, function(data, status) {&lt;/pre&gt;
+
+&lt;p&gt;Merupakan fungsi jQuery untuk melakukan post ajax dan meminta callback di URL “api/index.php” yang selanjutnya akan ditampilkan berupa Objek Javascript, nah setelah proses nya berhasil akan masuk ke proses berikutnya dan mengeksekusi baris berikutnya.&lt;/p&gt;
+
+&lt;pre&gt;if(status == 'success' &amp;#038;&amp;#038; data.statuses.length &amp;gt; 0){
+
+                $('#export').show();
+                $('#loading').empty();
+                $('#showTable').append('
+
+&lt;tr&gt;
+  &lt;th&gt;
+    Name
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Username
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Profile Image
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Tweet
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Location
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Followers Count
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Friends Count
+  &lt;/th&gt;
+  
+  &lt;th&gt;
+    Time Zone
+  &lt;/th&gt;
+&lt;/tr&gt;');
+               
+                $.each( data.statuses, function(i, item){
+                  $('#showTable').append('
+
+&lt;tr&gt;
+  &lt;td&gt;
+    '+item.user.name+'
+  &lt;/td&gt;'+'
+  
+  &lt;td&gt;
+    &amp;lt;a href=&quot;https://twitter.com/&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);&quot;+item.user.screen_name+'&quot;&amp;gt;'+item.user.screen_name+'&amp;lt;/a&amp;gt;
+  &lt;/td&gt;'+'
+  
+  &lt;td class=&quot;text-center&quot;&gt;
+    &lt;img src=&quot;'+item.user.profile_image_url+'&quot; /&gt;
+  &lt;/td&gt;'+'
+  
+  &lt;td&gt;
+    '+item.text.autoLink({target: &quot;_blank&quot;})+'
+  &lt;/td&gt;'+'
+  
+  &lt;td&gt;
+    '+item.user.location+'
+  &lt;/td&gt;
+  
+  &lt;td class=&quot;text-center&quot;&gt;
+    '+item.user.followers_count+'
+  &lt;/td&gt;
+  
+  &lt;td class=&quot;text-center&quot;&gt;
+    '+item.user.friends_count+'
+  &lt;/td&gt;
+  
+  &lt;td&gt;
+    '+item.user.time_zone+'
+  &lt;/td&gt;
+&lt;/tr&gt;').hide().fadeIn();
+                });
+
+            } 
+&lt;/pre&gt;
+
+&lt;p&gt;Jika data berhasil maka data akan di tampilkan di atribut HTML&lt;/p&gt;
+
+&lt;pre&gt;
+        &lt;!-- show table result --&gt;
+        
+&lt;/pre&gt;
+
+&lt;p&gt;Jika proses berhasil namun data-nya tidak tersedia akan masuk ke dalam proses selanjutnya&lt;/p&gt;
+
+&lt;pre&gt;else if(status == 'success' &amp;#038;&amp;#038; data.statuses.length &amp;lt;= 0) {
+
+              $('#loading').empty();
+              $('#loading').append('Not Available!');
+
+            }
+&lt;/pre&gt;
+
+&lt;p&gt;Proses tersebut akan mengosongkan atribut html yang memiliki &lt;strong&gt;id=”loading”&lt;/strong&gt; dan memasukan text &lt;strong&gt;Not Available&lt;/strong&gt; pada atribut HTML tersebut. Namun jika semua kondisi tidak terpenuhi atau terjadi error sewaktu proses maka akan masuk kedalam kondisi yang terakhir&lt;/p&gt;
+
+&lt;pre&gt;else {
+
+                console.log('ERROR!');
+                alert('ERROR!');
+            
+            }
+&lt;/pre&gt;
+
+&lt;p&gt;Kondisi diatas akan menampilkan teks error yang berupa &lt;strong&gt;alert&lt;/strong&gt; di dalam browser dan menampilkan log error di browser&lt;/p&gt;
+
+&lt;h2 id=&quot;penjelasan-file-apiindexphp&quot;&gt;Penjelasan file api/index.php&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Silahakn buat file index.php ini didalam API CLASS Twitter yang sudah kita download di&lt;/strong&gt;&lt;a href=&quot;https://github.com/abraham/twitteroauth&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);&quot;&gt;https://github.com/abraham/twitteroauth&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;&amp;lt;?php
+	require &quot;autoload.php&quot;;
+	require &quot;../config/config.php&quot;;
+	use Abraham\TwitterOAuth\TwitterOAuth;
+
+	$keyword = ( $_SERVER['REQUEST_METHOD'] == 'POST' ) ? $_POST['keyword'] : &quot;bandung&quot;;
+	$count 	 = ( $_SERVER['REQUEST_METHOD'] == 'POST' ) ? $_POST['count'] : 10;				
+	$connection = new TwitterOAuth($config['CONSUMER_KEY'], $config['CONSUMER_SECRET'], $config['ACCESS_TOKEN'], $config['ACCESS_TOKEN_SECRET']);
+
+	// UNTUK MENCARI HASHTAG BISA MENGGUNAKAN TWITTER BY SEARCH
+
+	$content = $connection-&amp;gt;get(&quot;search/tweets&quot;, [&quot;q&quot; =&amp;gt; $keyword, &quot;count&quot; =&amp;gt; $count]);
+
+	header('Content-Type: application/json');
+	echo json_encode($content); die;
+&lt;/pre&gt;
+
+&lt;p&gt;File ini berfungsi untuk menampilkan data yang diperoleh dari API Twitter yang telah kita buat sebelumnya. Variable &lt;strong&gt;$keyword&lt;/strong&gt; berupa kondisi jika ada data yang di pos melalui input text maka akan menggunakan data POST tersebut dan jika tidak maka akan menggunakan nilai default dari variable tersebut yaitu berupa string &lt;strong&gt;bandung&lt;/strong&gt; dan akan menampilkan tweet yang ada kata2 &lt;strong&gt;“bandung”&lt;/strong&gt; . Setelah itu variable &lt;strong&gt;$count&lt;/strong&gt; akan mengambil data POST yang kita post kan melalui atribut select HTML dan jika tidak ada data yang di pos kan akan mengambil nilai default dari variable tersebut yaitu &lt;strong&gt;10&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Selanjutnya variable &lt;strong&gt;$connection&lt;/strong&gt; akan mengeksekusi class &lt;strong&gt;TwitterOAuth&lt;/strong&gt; dengan parameter CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN dan ACCESS_TOKEN_SECRET yang sudah kita set sebelumnya.&lt;/p&gt;
+
+&lt;p&gt;Terakhir untuk variable &lt;strong&gt;$content&lt;/strong&gt; akan mengeksekusi METHOD &lt;strong&gt;get&lt;/strong&gt; dari CLASS TwitterOAuth yang sudah kita jadikan variable &lt;strong&gt;$connection&lt;/strong&gt; sebelumnya. Setelah itu menampilkan data tersebut ke dalam &lt;strong&gt;JSON&lt;/strong&gt; dengan menggunakan fungsi PHP &lt;strong&gt;json_encode&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Silahkan download assets nya disini&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.hitamcoklat.com/download/?b4bd1746b85fbf4fc0178466708a06dc&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://www.hitamcoklat.com']);&quot;&gt;DOWNLOAD ASSETS&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ohh ya untuk struktur tree folder nya seperti berikut ya  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;.
+├── api
+│   ├── autoload.php
+│   ├── composer.json
+│   ├── index.php
+│   ├── LICENSE.md
+│   ├── phpmd.xml
+│   ├── phpunit.xml
+│   ├── README.md
+│   ├── src
+│   │   ├── cacert.pem
+│   │   ├── Config.php
+│   │   ├── Consumer.php
+│   │   ├── HmacSha1.php
+│   │   ├── Request.php
+│   │   ├── Response.php
+│   │   ├── SignatureMethod.php
+│   │   ├── Token.php
+│   │   ├── TwitterOAuthException.php
+│   │   ├── TwitterOAuth.php
+│   │   ├── Util
+│   │   │   └── JsonDecoder.php
+│   │   └── Util.php
+│   └── tests
+│       ├── AbstractSignatureMethodTest.php
+│       ├── bootstrap.php
+│       ├── ConsumerTest.php
+│       ├── HmacSha1Test.php
+│       ├── kitten.jpg
+│       ├── sample_env
+│       ├── TokenTest.php
+│       ├── TwitterOAuthTest.php
+│       ├── Util
+│       │   └── JsonDecoderTest.php
+│       └── video.mp4
+├── assets
+│   ├── css
+│   │   ├── bootstrap.min.css
+│   │   └── styles.css
+│   ├── img
+│   │   └── logo.png
+│   └── js
+│       ├── autolink-min.js
+│       ├── bootstrap.min.js
+│       └── jquery.js
+├── config
+│   └── config.php
+├── index.php
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Folder api berisi API TWITTER yang sudah kita download di github tadi&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Gimana? sampai disini ada pertanyaan atau masih bingung?  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;. Silahkan komentar dibawah ya&lt;/p&gt;
+</description>
+        <pubDate>Thu, 28 Jul 2016 23:59:54 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2016/07/28/api-programming-studi-kasus-twitter-search-part-2/</guid>
+        
+        <category>php</category>
+        
+        <category>tutorial</category>
+        
+        <category>tutorial api programming</category>
+        
+        
+        <category>php</category>
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Memperbaiki Cross-Origin Request Blocked: IONIC</title>
+        <description>&lt;p&gt;Terjadi permasalahan ketika proses pengambilan data dari API (dalam kasus ini API yang digunakan menggunakan PHP) dan proses pengambilan data ini menggunakan ionic&lt;/p&gt;
+
+&lt;p&gt;Error yang terjadi adalah &lt;strong&gt;Cross-Origin Request Blocked:&lt;/strong&gt; padahal setelah di cek menggunakan plugin mozilla &lt;strong&gt;HTTP PARSER&lt;/strong&gt; data-nya berhasil di dapat. Untuk penjelasan mengenai &lt;strong&gt;CORS&lt;/strong&gt; ini silahakan lihat penjelasan mengenai &lt;strong&gt;CORS&lt;/strong&gt; tersebut &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://developer.mozilla.org']);&quot; title=&quot;CORS&quot;&gt;disini&lt;/a&gt; ya&lt;/p&gt;
+
+&lt;p&gt;Langkah selanjutnya silahakan buka file &lt;strong&gt;API&lt;/strong&gt; yang telah kamu buat, lalu masukan sintaks dibawah ini&lt;/p&gt;
+
+&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;if (isset($_SERVER['HTTP_ORIGIN'])) {
+        header(&quot;Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}&quot;);
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Max-Age: 86400');    //cache 1 hari
+    }
+&lt;/pre&gt;
+
+&lt;p&gt;Semoga Bermanfaat!  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 10 Jun 2016 15:07:43 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2016/06/10/memperbaiki-cross-origin-request-blocked-ionic/</guid>
+        
+        <category>data parsing</category>
+        
+        <category>ionic</category>
+        
+        
+        <category>Mobile</category>
+        
+      </item>
+    
+      <item>
+        <title>Debugging Aplikasi Hybrid Menggunakan GapDebug</title>
+        <description>&lt;p&gt;Sekarang ini banyak sekali para developer menggunakan Phonegap (atau&lt;/p&gt;
+
+&lt;p&gt;Cordova) untuk membuat hybrid mobile. Yaa..apalagi web developer seperti&lt;/p&gt;
+
+&lt;p&gt;saya yang lebih memahami HTML5 untuk membuat aplikasi dibandingkan harus&lt;/p&gt;
+
+&lt;p&gt;menggunakan bahasa pemrograman JAVA, C++ atau lainnya. Mungkin karena setiap hari berkutat dengan bahasa seputar web.&lt;/p&gt;
+
+&lt;p&gt;Dalam postingan kali ini saya mencoba untuk mengenalkan tools yang cukup berguna untuk melakukan proses debugging dalam membuat aplikasi hybrid dengan menggunakan phonegap/cordova. Sebenarnya ada banyak sekali tools untuk melakukan proses debugging ini, seperti contoh nya &lt;strong&gt;weinre&lt;/strong&gt;, tapi kenapa saya menggunakan &lt;strong&gt;GapDebug&lt;/strong&gt;? okee…mari kita bahas ya.  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_biggrin.gif&quot; alt=&quot;:D&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gapdebug&quot;&gt;GapDebug&lt;/h2&gt;
+
+&lt;p&gt;Sama seperti &lt;strong&gt;weinre&lt;/strong&gt;, &lt;strong&gt;GapDebug&lt;/strong&gt; merupakan sebuah tools debugger yang gratis dan cross-platform, bisa digunakan untuk debugging yang bisa berjalan di &lt;strong&gt;Windows&lt;/strong&gt; dan &lt;strong&gt;MacOS&lt;/strong&gt; yang cukup banyak fitur yang sangat berguna untuk keperluan debugging.&lt;/p&gt;
+
+&lt;p&gt;Cara penggunaan &lt;strong&gt;GapDebug&lt;/strong&gt; sangatlah mudah dibandingkan tools lainnya. Yakni cukup melakukan build device anda baik itu anda menggunakan &lt;strong&gt;AndroidStudio&lt;/strong&gt; atau menggunakan &lt;strong&gt;CLI&lt;/strong&gt; sambil menjalankan aplikasi &lt;strong&gt;GapDebug&lt;/strong&gt;nya. Untuk penggunakan fitur-fiturnya hampir sama dengan menggunakan plugin &lt;strong&gt;FireBug&lt;/strong&gt; pada Firefox. Yaaa..disini anda sudah tidak asing lagi dalam menggunakan tools ini.hehe&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/gapdebug.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1254]&quot; title=&quot;gapdebug&quot;&gt;&lt;img class=&quot;alignnone size-large wp-image-1255&quot; title=&quot;gapdebug&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/gapdebug-1024x486.png&quot; alt=&quot;&quot; width=&quot;1024&quot; height=&quot;486&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nah dibawah ini screenshot gambar dalam melakukan proses debugging-nya, mirip dengan tools &lt;strong&gt;FireBug&lt;/strong&gt; di Mozilla Firefox ya?. Ya! sebenernya &lt;strong&gt;GapDebug&lt;/strong&gt; ini merupakan aplikasi web-based. Untuk bisa mencobanya silahkan akses http://localhost:8081.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/proses-debugging.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1254]&quot; title=&quot;proses-debugging&quot;&gt;&lt;img class=&quot;alignnone size-large wp-image-1256&quot; title=&quot;proses-debugging&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/proses-debugging-1024x539.png&quot; alt=&quot;&quot; width=&quot;1024&quot; height=&quot;539&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nah coba lihat screenshot dibawah ini, selain anda bisa melihat dan memonitor aplikasi yang sedang berjalan secara realtime, anda juga bisa langsung mengedit HTML pada aplikasi yang anda buat secara langsung.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/proses-debuggin2.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1254]&quot; title=&quot;proses-debuggin2&quot;&gt;&lt;img class=&quot;alignnone size-full wp-image-1257&quot; title=&quot;proses-debuggin2&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2016/03/proses-debuggin2.png&quot; alt=&quot;&quot; width=&quot;760&quot; height=&quot;512&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Semoga bermanfaat…&lt;/p&gt;
+</description>
+        <pubDate>Tue, 22 Mar 2016 22:23:11 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2016/03/22/debugging-aplikasi-hybrid-menggunakan-gapdebug/</guid>
+        
+        <category>android</category>
+        
+        <category>belajar gapdebug</category>
+        
+        <category>belajar menggunakan gapdebug</category>
+        
+        <category>debugging dengan gapdebug</category>
+        
+        <category>gapdebug</category>
+        
+        <category>membuat aplikasi hybrid</category>
+        
+        
+        <category>Mobile</category>
+        
+        <category>Tutorial</category>
+        
+        <category>Website</category>
+        
+      </item>
+    
+      <item>
+        <title>Membuat CMS Blog PHP dan MySQL Part-1</title>
+        <description>&lt;p&gt;Pada postingan kali ini saya akan membahas mengenai pembuatan CMS blog. Yaa sebelumnya saya posting tentang “Membuat Blog dengan PHP” tapi tidak begitu jelas yah hehe, sekarang mau coba posting mengenai pembuatan CMS blog yang lebih lengkap nya, supaya lebih jelas.. 
+&lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;kerangka-postingan&quot;&gt;Kerangka Postingan&lt;/h2&gt;
+
+&lt;table style=&quot;border-collapse:collapse;border-spacing:0; margin-left: 20px; margin-bottom: 20px;&quot;&gt;
+  &lt;tr&gt;
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px; text-align: left;&quot; colspan=&quot;2&quot;&gt;
+      Membuat Blog Part-1
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot; rowspan=&quot;3&quot;&gt;
+      Pembahasan Kali ini -&amp;gt;
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat halaman awal Blog
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat halaman detail Blog
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat Database &amp;amp; Table
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-weight:bold&quot; colspan=&quot;2&quot;&gt;
+      Membuat Blog Part-2
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot; rowspan=&quot;2&quot;&gt;
+      Pembahasan =&amp;gt;
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat Halaman admin
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat Fitur Posting &amp;#8211; add, edit dan delete
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-weight:bold&quot; colspan=&quot;2&quot;&gt;
+      Membuat Blog Part-3
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;font-style:italic&quot;&gt;
+      Pembahasan =&amp;gt;
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px&quot;&gt;
+      Membuat Fitur Kategori &amp;#8211; add, edit dan delete
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Pertama kita siapkan dulu file untuk halaman front end nya, dimana file ini berfungsi untuk menampilkan halaman postingan kita. Didalam halaman ini terdiri dari&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Header&lt;/li&gt;
+  &lt;li&gt;Navigasi&lt;/li&gt;
+  &lt;li&gt;Bagian artikel yang terletak disebelah kiri&lt;/li&gt;
+  &lt;li&gt;Bagian sidebar yang akan menampilkan postingan terbaru, terletak disebelah kanan&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pada bagian halaman artikel terdapat 2 tampilan, yaitu halaman home awal yang befungsi untuk melihat kilasan artikel sebelum user melihat artikel secara detail dan halaman detail artikel dimana user akan melihat detail artikel ketika user meng klik artikel lalu setelah itu kita tampilkan artikel secara penuh.&lt;/p&gt;
+
+&lt;h2 id=&quot;membuat-halaman-depan-blog&quot;&gt;Membuat Halaman depan Blog&lt;/h2&gt;
+
+&lt;p&gt;Baiklah langsung saja kita membuat halaman awal blog kita. Pada pembuatan blog yang akan kita buat ini dapat langsung liat di screenshot nya dibawah ini.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog.jpg&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;halaman_depan_blog&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1124&quot; title=&quot;halaman_depan_blog&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-300x228.jpg&quot; alt=&quot;halaman_depan_blog&quot; width=&quot;300&quot; height=&quot;228&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dan halaman detail artikelnya sebagai berikut&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-FILEminimizer.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;halaman_depan_dua&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1126&quot; title=&quot;halaman_depan_dua&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/halaman_depan_blog-FILEminimizer-300x232.png&quot; alt=&quot;halaaman_detail_blog&quot; width=&quot;300&quot; height=&quot;232&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Berikut source code HTML nya&lt;/p&gt;
+
+&lt;h3 id=&quot;indexhtml&quot;&gt;index.html&lt;/h3&gt;
+
+&lt;pre class=&quot;brush: php; title: ; notranslate&quot; title=&quot;&quot;&gt;&amp;lt;html&amp;gt;
+	&amp;lt;head&amp;gt;
+		&amp;lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/style.css&quot; /&amp;gt;
+	&amp;lt;/head&amp;gt;
+	&amp;lt;body&amp;gt;
+		&amp;lt;div id=&quot;wrap&quot;&amp;gt;
+			&amp;lt;div id=&quot;header&quot;&amp;gt;
+				&amp;lt;h1&amp;gt;Hitamcoklat | Blog&amp;lt;/h1&amp;gt;
+			&amp;lt;/div&amp;gt;
+			&amp;lt;div id=&quot;navigasi&quot;&amp;gt;
+				&amp;lt;ul&amp;gt;
+					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Satu&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Dua&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Tiga&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+					&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Menu Empat&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+				&amp;lt;/ul&amp;gt;
+			&amp;lt;/div&amp;gt;
+			&amp;lt;div id=&quot;konten&quot;&amp;gt;
+				&amp;lt;div id=&quot;kiri&quot;&amp;gt;
+					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
+						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
+						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+					&amp;lt;/div&amp;gt;
+
+					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
+						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
+						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+					&amp;lt;/div&amp;gt;
+
+					&amp;lt;div class=&quot;artikel&quot;&amp;gt;
+						&amp;lt;h2&amp;gt;Postingan Satu&amp;lt;/h2&amp;gt;
+						&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLoremLorem Lorem ipsum dolor sit amet...&amp;lt;a href=&quot;#&quot;&amp;gt;Baca Selengkapnya&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+					&amp;lt;/div&amp;gt;
+
+				&amp;lt;/div&amp;gt;
+				&amp;lt;div id=&quot;kanan&quot;&amp;gt;
+					&amp;lt;h2&amp;gt;Recent Post&amp;lt;/h2&amp;gt;
+					&amp;lt;ul&amp;gt;
+						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Satu&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Dua&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Tiga&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+						&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Artikel Empat&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+					&amp;lt;/ul&amp;gt;
+				&amp;lt;/div&amp;gt;
+			&amp;lt;/div&amp;gt;
+			&amp;lt;div class=&quot;clear&quot;&amp;gt;&amp;lt;/div&amp;gt;
+			&amp;lt;div id=&quot;footer&quot;&amp;gt;
+				&amp;lt;p&amp;gt;Hitamcoklat | Blog&amp;lt;/p&amp;gt;
+			&amp;lt;/div&amp;gt;
+		&amp;lt;/div&amp;gt;
+	&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/pre&gt;
+
+&lt;h3 id=&quot;stylecss&quot;&gt;style.css&lt;/h3&gt;
+
+&lt;pre class=&quot;brush: css; title: ; notranslate&quot; title=&quot;&quot;&gt;* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background-color: #fff;
+	font-family: Arial;
+	font-size: 0.850em;
+}
+
+.artikel p {
+	margin-top: 10px;
+}
+
+#wrap {
+	padding: 10px;
+	background-color: #EAEAEA;
+	width: 800px;
+	margin: 20px auto;
+}
+
+#header, #navigasi, #konten {
+	width: 100%;
+	float: left;
+}
+
+#header {
+	height: 70px;
+}
+
+#navigasi {
+	background-color: #CCC;
+}
+
+#navigasi ul li {
+	margin: 10px;
+	font-weight: bold;
+	list-style: none;
+	float: left;
+}
+
+#navigasi ul li a, #kanan ul li a {
+	text-decoration: none;
+	color: #000;
+}
+
+#navigasi ul li a:hover, #kanan ul li a:hover {
+	text-decoration: underline;
+}
+
+#kanan ul li {
+	list-style: none;
+	font-weight: bold;
+	border-left: 3px solid #CCC;
+	margin-top: 5px;
+	padding-left: 5px;
+	background-color: #fff;
+}
+.clear {
+	clear: both;
+}
+
+.artikel {
+	border: 1px solid #CCC;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+#kiri {
+	padding: 10px;
+	float: left;
+	width: 65%;
+}
+
+#kanan {
+	padding: 10px;
+	float: left;
+	width: 30%;
+}
+
+#footer {
+	background-color: #CCCCCC;
+	width: 100%;
+	height: 50px;
+}
+
+#footer p {
+	margin: 10px;
+	float: left;
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Baiklah jika semuanya sudah selesai maka tampilannya akan sama dengan screenshot diatas  &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;, kita lanjut membuat database yaa biar cepet hehe&lt;/p&gt;
+
+&lt;h2 id=&quot;membuat-database&quot;&gt;Membuat database&lt;/h2&gt;
+
+&lt;p&gt;Selanjutnya kita akan membuat database. Seperti biasa pertama buat dulu database di phpmyadmin dengan nama bebas terserah anda hehe. Setelah itu kita akan membuat table – table dalam database, untuk lebih jelasnya dapat dilihat pada gambar berikut ini&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/database.png&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://hitamcoklat.com']);&quot; rel=&quot;lightbox[1123]&quot; title=&quot;database&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-1135&quot; title=&quot;database&quot; src=&quot;http://hitamcoklat.com/wp-content/uploads/2014/06/database-300x206.png&quot; alt=&quot;database&quot; width=&quot;300&quot; height=&quot;206&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;*Keterangan&lt;/p&gt;
+
+&lt;h3 id=&quot;table-category&quot;&gt;Table Category&lt;/h3&gt;
+
+&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
+  &lt;tr&gt;
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Nama Field
+    &lt;/th&gt;
+    
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Tipe
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      id
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      int(11)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      category
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      varchar(100)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;table-artikel&quot;&gt;Table Artikel&lt;/h3&gt;
+
+&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
+  &lt;tr&gt;
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Nama Field
+    &lt;/th&gt;
+    
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Tipe
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      id
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      int(11)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      id_kategori
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      varchar(100)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      judul
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      varchar(250)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      konten
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      text
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      tanggal
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;table-user&quot;&gt;Table User&lt;/h3&gt;
+
+&lt;table style=&quot;border-collapse:collapse;border-spacing:0;border-color:#999&quot;&gt;
+  &lt;tr&gt;
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Nama Field
+    &lt;/th&gt;
+    
+    &lt;th style=&quot;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4&quot;&gt;
+      Tipe
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      id_user
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      int(5)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      username
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      varchar(10)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      password
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      varchar(35)
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      level
+    &lt;/td&gt;
+    
+    &lt;td style=&quot;font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA&quot;&gt;
+      enum(&amp;#8216;user&amp;#8217;,'admin&amp;#8217;)&lt;br /&gt; DEFAULT ‘user’
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Oke untuk part pertama cukup sampai disini, besok dilanjut yah   &lt;img src=&quot;http://localhost/hitamcoklat/wp-includes/images/smilies/icon_smile.gif&quot; alt=&quot;:)&quot; class=&quot;wp-smiley&quot; /&gt;Salam Blogger!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.hitamcoklat.com/download/?3006342321751ecf0fe55306b8c71fe7&quot; onclick=&quot;javascript:_gaq.push(['_trackEvent','outbound-article','http://www.hitamcoklat.com']);&quot; class=&quot;download&quot;&gt;Download File&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 12 Jun 2014 00:31:24 +0700</pubDate>
+        <link>http://blog.hitamcoklat.com/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</link>
+        <guid isPermaLink="true">http://blog.hitamcoklat.com/2014/06/11/membuat-cms-blog-php-dan-mysql-part-1/</guid>
+        
+        <category>membuat blog php</category>
+        
+        <category>membuat CMS dengan php</category>
+        
+        <category>Membuat CMS PHP mudah</category>
+        
+        
+        <category>php</category>
+        
+        <category>Tutorial</category>
+        
+      </item>
+    
+  </channel>
+</rss>
